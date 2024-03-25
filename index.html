@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: rgb(155, 224, 201);
+      }
+
+      .sidebar h2 {
+        color: #100f0f;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .sidebar ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .sidebar ul li {
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+      }
+
+      .sidebar ul li a {
+        color: #0a0a0a;
+        text-decoration: none;
+        margin-left: 10px;
+        transition: color 0.3s;
+      }
+
+      .sidebar ul li a:hover {
+        color: #f3eeee;
+      }
+
+      .sidebar ul li img {
+        margin-right: 10px;
+      }
+
+      .sidebar {
+        height: 100%;
+        width: 250px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding-top: 20px;
+        background-color: #a3f0ce;
+        font-size: 20px;
+        align-items: center;
+      }
+
+      .content {
+        margin-left: 250px;
+        padding: 20px;
+        display: flex; /* Display flex to align cards side by side */
+        flex-wrap: wrap; /* Allow cards to wrap to the next line if needed */
+        gap: 30px; /* Add gap between cards */
+      }
+
+      .content h2 {
+        color: #070606;
+      }
+
+      .content p {
+        color: #070606;
+      }
+
+      .card {
+        width: 300px;
+        height: 250px;
+        border-radius: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+        background-color: rgb(167, 236, 184);
+        margin-top: 100px;
+        position: relative;
+      }
+
+      .card:hover {
+        transform: scale(1.05);
+      }
+
+      .card-content {
+        padding: 20px;
+      }
+
+      .card-icon {
+        position: absolute;
+        bottom: 10px; /* Adjust the position of the icon */
+        left: 80%;
+        transform: translateX(-50%); /* Center the icon horizontally */
+        height: 20px;
+        width: 20px;
+      }
+
+      .herald {
+        position: absolute;
+        top: 50px; /* Adjust top position to move it to the top */
+        left: 50%; /* Adjust left position to center it */
+        height: 90px;
+        width: 90px;
+        border-radius: 50%;
+      }
+
+      .top-right {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      .top-right img {
+        margin-left: 10px;
+      }
+
+      .top-right button {
+        background-color: transparent;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        transition: color 0.3s;
+      }
+
+      .top-right button:hover {
+        color: #f3eeee;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top-right">
+      <a href="https:" target="_blank">
+        <img src="notification.png" alt="Notification" width="25" height="25" />
+      </a>
+      <a href="https://mail.google.com/mail/u/1/#inbox" target="_blank">
+        <img src="profile.png" alt="Profile" width="35" height="35" />
+      </a>
+    </div>
+
+    <div class="sidebar">
+      <h2>Dashboard</h2>
+      <ul>
+        <li>
+          <img src="home.png" alt="Home" width="20" height="20" />
+          <a href="#">Home</a>
+        </li>
+        <li>
+          <img src="notice.png" alt="Noticeboard" width="25" height="25" />
+          <a href="#">Noticeboard</a>
+        </li>
+        <li>
+          <img src="todo.png" alt="To-Do" width="30" height="30" />
+          <a href="#">To-Do</a>
+        </li>
+        <li>
+          <img src="setting.png" alt="Settings" width="35" height="35" />
+          <a href="#">Settings</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Courses</h2>
+      <a href="English.html" class="card">
+        <img src="herald.png" alt="pic" class="herald" />
+        <div class="card-content">
+          <p>4NCC01-English</p>
+          <p>Class 12</p>
+        </div>
+        <img src="work.png" alt="Icon1" class="card-icon" />
+      </a>
+      <a href="Science.html" class="card">
+        <img src="herald.png" alt="pic" class="herald" />
+        <div class="card-content">
+          <p>4NCC02-Science</p>
+          <p>Class 12</p>
+        </div>
+        <img src="work.png" alt="Icon2" class="card-icon" />
+      </a>
+    </div>
+  </body>
+</html>
