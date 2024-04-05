@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Marks</title>
+    <link rel="stylesheet" href="Grade.css">
+</head>
+<body>
+    <div class="background-layer"></div>
+
+    <div class="content-layer">
+
+        
+        <!-- Notification icon -->
+        <img src="image/notif.png" alt="Notification Icon" class="notification-icon">
+        
+        <!-- User picture -->
+        <img src="image/user.jpg" alt="User Picture" class="user-picture">
+
+        
+        <table class="student-table">
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Submitted Date</th>
+                    <th>Submitted File</th>
+                    <th>Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>John Doe</td>
+                    <td>2024-04-03</td>
+                    <td><a href="submitted_file.docx">submitted_file.docx</a></td>
+                    <td>
+                        <div class="grade-dropdown">
+                            <img src="image/grade.png" alt="Grade Icon" class="grade-icon">
+                            <span class="selected-grade"></span> <!-- Placeholder for selected grade -->
+                            <div class="dropdown-content">
+                                <a href="#" data-grade="A+">A+</a>
+                                <a href="#" data-grade="A">A</a>
+                                <a href="#" data-grade="B+">B+</a>
+                                <a href="#" data-grade="B">B</a>
+                                <a href="#" data-grade="C+">C+</a>
+                                <a href="#" data-grade="C">C</a>
+                                <a href="#" data-grade="D+">D+</a>
+                                <a href="#" data-grade="D">D</a>
+                            </div>
+                        </div>
+                        </div>
+                    </td>
+                </tr>
+                <!-- More rows here -->
+            </tbody>
+        </table>
+
+    </div>
+    
+    <h1>Marking Panel</h1>
+    <div class="title">
+        <a href="teacherDashboard.html" class="button">Dashboard</a> 
+        <a href="students.html" class="button">Students</a> 
+        <a href="status.html" class="button">Status</a> 
+        <a href="grade.html" class="button">Grade</a>
+        <a href="setting.html" class="button" style="margin-top: 200px;">Setting</a>
+    </div>
+
+    <div class="dropdown">
+        <select id="subjectDropdown" class="button">
+            <option value="" disabled selected>Select Subject</option>
+            <option value="english">English</option>
+            <option value="social_studies">Social Studies</option>
+            <option value="science">Science</option>
+        </select>
+    </div>
+    
+    
+    
+
+    <script src="Grade.js"></script> 
+</body>
+</html>
