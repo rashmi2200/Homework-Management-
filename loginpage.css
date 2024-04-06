@@ -58,6 +58,24 @@ body {
     background-color: #ccc;
 }
 
+.password-field {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.toggle-password img {
+    width: 20px; /* Adjust the width of the eye icon */
+    height: auto; /* Allow the height to adjust proportionally */
+}
+
 .login-card {
     margin-top: 50px;
     margin-left: 40px;

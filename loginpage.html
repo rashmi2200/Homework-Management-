@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homework Collaboration</title>
     <link rel="stylesheet" href="loginpage.css">
-    <!-- Include Boxicons library -->
-    <link href="https://cdn.jsdelivr.net/boxicons/2.0.7/css/boxicons.min.css" rel="stylesheet">
+    
 </head>
 <body>
     <div class="container">
@@ -22,23 +21,22 @@
             <div class="login-card">
                 <h2>Login Panel</h2>
                 <!-- Your login form goes here -->
-                <form>
+                <form id="login-form"> <!-- Added ID to the form -->
                     <div class="input-container">
                         <label for="email" class="form-label">Email:</label>
                         <input type="text" id="email" name="email" class="form-input">
                     </div>
                     <div class="input-container">
-                        <label for="password" class="form-label">Password:</label>
                         <div class="password-field">
                             <input type="password" id="password" name="password" class="form-input">
-                            <span class="toggle-password" id="toggle-password">
-                                <i class='bx bx-show'></i>
+                            <span class="toggle-password" id="toggle-password" onclick="togglePasswordVisibility()"> <!-- Added onclick event -->
+                                <img src="image/eye-icon.png" alt="Toggle Password Visibility">
                             </span>
                         </div>
                     </div>
                     <button type="submit">Login</button>
                 </form>
-                
+                <p id="login-message"></p> <!-- Added placeholder for login message -->
             </div>
         </div>
     </div>
