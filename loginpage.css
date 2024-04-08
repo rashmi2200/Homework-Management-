@@ -178,14 +178,11 @@ body {
     transform: translateY(-50%);
     width: 20px;
     height: 20px;
-    background-image: url('eye-icon.png'); /* Replace 'eye-icon.png' with your icon */
+    /* Replace 'eye-icon.png' with your icon */
     background-size: cover;
     cursor: pointer;
 }
 
-.toggle-password.visible {
-    background-image: url('eye-slash-icon.png'); /* Replace 'eye-slash-icon.png' with your icon */
-}
 
 
 

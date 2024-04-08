@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Get form data
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
+        
 
         // Send POST request to login endpoint
         try {
@@ -40,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Redirect user to teacher dashboard if login successful
             if (data.success) {
                 console.log('Login successful. Redirecting to teacher dashboard...');
-                window.location.href = '/teacherDashboard.html';
+                window.location.href = data.redirectTo; // Redirect to the URL provided by the server
             } else {
                 console.log('Login failed. Please check your email and password.');
             }
@@ -50,3 +51,4 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
