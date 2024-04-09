@@ -1,0 +1,130 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: white;
+  padding-left: 300px;
+}
+.background {
+  width: 300px;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+  position: absolute;
+  background: #5955b3;
+}
+h1 {
+  font-size: 32px; /* Adjust the font size as needed */
+  color: #333; /* Adjust the color as needed */
+  margin-top: 20px; /* Adjust the margin-top as needed */
+  text-align: center; /* Center the heading */
+  position: absolute; /* Position the heading absolutely */
+  top: 60px; /* Adjust the top position */
+  left: 34%; /* Center the heading horizontally */
+  transform: translateX(-50%); /* Center the heading horizontally */
+  z-index: 999; /* Ensure the heading is on top */
+}
+.content-layer {
+  top: 130px;
+  left: 1300px;
+  position: absolute;
+  background: white;
+}
+.top-right {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.top-right img {
+  margin-left: 10px;
+}
+.main-menu {
+  position: fixed;
+  width: 300px;
+  height: 100%;
+  background-color: #5955b3;
+  padding: 1rem 0;
+}
+.nav,
+.text {
+  color: white;
+  font-size: 24px;
+  font-family: Inter;
+  font-weight: 600;
+  word-wrap: break-word;
+  position: absolute;
+  left: 64px; /* Adjust as needed */
+}
+.nav {
+  color: white;
+  font-size: 24px;
+  font-family: Inter;
+  font-weight: 600;
+  word-wrap: break-word;
+  position: absolute;
+  left: 54px;
+  top: 110px; /* Adjust the top position as needed */
+}
+.text {
+  top: auto; /* Will be overridden by inline style */
+}
+.button {
+  display: block;
+  padding: 10px 20px;
+  background-color: #ffffff;
+  color: #5955b3;
+  text-decoration: none;
+  border-radius: 5px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.content-area {
+  position: absolute;
+  margin-left: 350px;
+  padding: 1rem;
+  min-height: calc(100vh - 60px);
+}
+.card-container {
+  padding-top: 130px;
+  display: flex;
+  flex-wrap: wrap; /* Allow cards to wrap to next line */
+  margin: 20px;
+}
+
+.card {
+  background-color: #aaa7e3;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 5px;
+  width: 250px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  height: 250px;
+}
+
+.card h3 {
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.card p {
+  font-size: 14px;
+  color: #333;
+}
+
+.card a {
+  text-decoration: none;
+  color: #007bff;
+}

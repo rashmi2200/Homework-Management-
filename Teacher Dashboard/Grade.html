@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Marks</title>
+    <style>
+      body, html {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 1440px;
+    height: 1024px;
+    position: relative;
+    background: white;
+}
+
+/*heading*/
+h1 {
+    font-size: 32px; /* Adjust the font size as needed */
+    color: #333; /* Adjust the color as needed */
+    margin-top: 20px; /* Adjust the margin-top as needed */
+    text-align: center; /* Center the heading */
+    position: absolute; /* Position the heading absolutely */
+    top: 60px; /* Adjust the top position */
+    left: 34%; /* Center the heading horizontally */
+    transform: translateX(-50%); /* Center the heading horizontally */
+    z-index: 999; /* Ensure the heading is on top */
+}
+
+.background-layer {
+    width: 1460px;
+    height: 1010px;
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    background: #5955B3;
+}
+
+.content-layer {
+    width: 1152px;
+    height: 969px;
+    left: 268px;
+    top: 16px;
+    position: absolute;
+    background: white;
+    border-radius: 50px;
+}
+
+
+
+.title, .text {
+    color: white;
+    font-size: 24px;
+    font-family: Inter;
+    font-weight: 600;
+    word-wrap: break-word;
+    position: absolute;
+    left: 64px; /* Adjust as needed */
+}
+
+.title {
+    color: white;
+    font-size: 24px;
+    font-family: Inter;
+    font-weight: 600;
+    word-wrap: break-word;
+    position: absolute;
+    left: 54px;
+    top: 200px; /* Adjust the top position as needed */
+}
+.text {
+    top: auto; /* Will be overridden by inline style */
+}
+
+.button {
+    display: block; /* Change display to block */
+    padding: 10px 20px;
+    background-color: #ffffff;
+    color: #5955B3;
+    text-decoration: none;
+    border-radius: 25px;
+    text-align: center; 
+    margin-bottom: 40px; /* Increase margin between buttons */
+}
+
+.button:hover {
+    background-color: #E6E6F4;
+}
+
+.notification-icon {
+    position: absolute;
+    top: 55px; /* Adjust as needed */
+    right: 120px; /* Adjust as needed */
+    width: 30px; /* Adjust as needed */
+    height: auto; /* Maintain aspect ratio */
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+.user-picture {
+    position: absolute;
+    top: 55px; /* Adjust as needed */
+    right: 70px; /* Adjust as needed */
+    width: 30px; /* Adjust as needed */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 50%; /* Make it circular if needed */
+    z-index: 999; /* Ensure it's below notification icon */
+}
+
+/*DROPDOWN*/
+.dropdown {
+    position: absolute;
+    Left: 350px; /* Adjust the right offset */
+    top: 200px; /* Adjust the top offset */
+    z-index: 999; /* Ensure the dropdown is on top of other elements */
+}
+
+/* Styling for the dropdown select */
+.dropdown select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 18px;
+    width: 300px;
+    font-family: Inter;
+}
+
+.dropdown select:hover,
+.dropdown select:focus {
+    border-color: #000000; /* Darker border color on hover/focus for better feedback */
+    border-radius: 10px;
+}
+
+/*TABLE*/
+
+.student-table {
+    width: 90%;
+    margin-left: 55px;
+    margin-top: 270px;
+    border-collapse: collapse;
+}
+
+.student-table th {
+    color: white; /* Change text color for table headers */
+    background-color: #5955B3;
+    font-size: 20px;
+    padding: 5px; /* Adjust padding to decrease height */
+}
+
+.student-table th,
+.student-table td {
+    border: 1px solid #c3bfbf;
+    padding: 5px; /* Adjust padding to decrease height */
+}
+
+.student-table tbody td {
+    color: black; /* Change text color for table data cells */
+}
+
+.student-table tbody {
+    height: 70px; /* Set a fixed height for the tbody to enable scrolling */
+    overflow-y: auto; /* Enable vertical scrolling for tbody */
+}
+
+.student-table tbody::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+}
+
+.student-table tbody::-webkit-scrollbar-thumb {
+    background-color: #888; /* Color of the scrollbar thumb */
+    border-radius: 4px; /* Radius of the scrollbar thumb */
+}
+
+.grade-icon {
+    width: 30px; /* Adjust as needed */
+    height: 30px; /* Adjust as needed */
+    cursor: pointer; /* Change cursor to indicate interactivity */
+    margin-top: -5px;
+    position: absolute;
+    left: 95px; /* Adjust as needed */
+}
+
+/* Dropdown */
+.grade-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 100px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 999; /* Ensure the dropdown content is above other elements */
+    top: 100%; /* Align the dropdown content below its parent */
+    left: 30px; /* Align the dropdown content with its parent */
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.grade-dropdown:hover .dropdown-content {
+    display: block;
+}
+    </style>
+</head>
+<body>
+    <div class="background-layer"></div>
+
+    <div class="content-layer">
+
+        
+        <!-- Notification icon -->
+        <img src="notif.png" alt="Notification Icon" class="notification-icon">
+        
+        <!-- User picture -->
+        <img src="user.jpg" alt="User Picture" class="user-picture">
+
+        
+        <table class="student-table">
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Submitted Date</th>
+                    <th>Submitted File</th>
+                    <th>Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>John Doe</td>
+                    <td>2024-04-03</td>
+                    <td><a href="submitted_file.docx">submitted_file.docx</a></td>
+                    <td>
+                        <div class="grade-dropdown">
+                            <img src="grade.png" alt="Grade Icon" class="grade-icon">
+                            <span class="selected-grade"></span> <!-- Placeholder for selected grade -->
+                            <div class="dropdown-content">
+                                <a href="#" data-grade="A+">A+</a>
+                                <a href="#" data-grade="A">A</a>
+                                <a href="#" data-grade="B+">B+</a>
+                                <a href="#" data-grade="B">B</a>
+                                <a href="#" data-grade="C+">C+</a>
+                                <a href="#" data-grade="C">C</a>
+                                <a href="#" data-grade="D+">D+</a>
+                                <a href="#" data-grade="D">D</a>
+                            </div>
+                        </div>
+                        </div>
+                    </td>
+                </tr>
+                <!-- More rows here -->
+            </tbody>
+        </table>
+
+    </div>
+    
+    <h1>Marking Panel</h1>
+    <div class="title">
+        <a href="teacherDashboard.html" class="button">Dashboard</a> 
+        <a href="students.html" class="button">Students</a> 
+        <a href="status.html" class="button">Status</a> 
+        <a href="grade.html" class="button">Grade</a>
+        <a href="setting.html" class="button" style="margin-top: 200px;">Setting</a>
+    </div>
+
+    <div class="dropdown">
+        <select id="subjectDropdown" class="button">
+            <option value="" disabled selected>Select Subject</option>
+            <option value="english">English</option>
+            <option value="social_studies">Social Studies</option>
+            <option value="science">Science</option>
+        </select>
+    </div>
+    
+    
+    
+
+    <script src="Grade.js"></script> 
+</body>
+</html>
