@@ -24,7 +24,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Send POST request to login endpoint
         try {
-            const response = await fetch('/login', {
+            console.log("fetch 8080")
+            const response = await fetch('http://localhost:3000/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -38,17 +39,20 @@ document.addEventListener('DOMContentLoaded', function() {
             // Display login message
             document.getElementById('login-message').innerText = data.message;
 
-            // Redirect user to teacher dashboard if login successful
-            if (data.success) {
-                console.log('Login successful. Redirecting to teacher dashboard...');
-                window.location.href = data.redirectTo; // Redirect to the URL provided by the server
-            } else {
-                console.log('Login failed. Please check your email and password.');
-            }
+            // Check if login was successful
+        if (data.success) {
+            console.log('Login successful. Redirecting to teacher dashboard...');
+            window.location.href = '/teacherDashboard.html'; // Redirect to the teacher dashboard page
+        } else {
+            console.log('Login failed. Please check your email and password.');
+        }
         } catch (error) {
             console.error('An error occurred:', error);
             document.getElementById('login-message').innerText = 'An error occurred. Please try again later.';
         }
     });
 });
+
+
+
 
