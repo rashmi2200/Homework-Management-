@@ -61,9 +61,10 @@ app.post('/login', async (req, res) => {
         if (!passwordMatch) {
             return res.status(401).json({success:false, message: "Invalid email or password" });
         }
+        console.log("User role:", user.role);
+        return res.status(200).json({ success: true, role: user.role, message: "Login successful" });
+       
 
-        // If login is successful, return success message or token
-        return res.status(200).json({ success:true,message: "Login successful" });
     } catch (error) {
         // If an error occurs, return error message
         console.error("Error during login:", error);
