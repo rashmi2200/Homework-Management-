@@ -1,0 +1,271 @@
+/* Existing CSS styles */
+
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 1440px;
+    height: 1024px;
+    position: relative;
+    background: white;
+}
+
+
+/*heading*/
+h1 {
+    font-size: 32px; /* Adjust the font size as needed */
+    color: #333; /* Adjust the color as needed */
+    margin-top: 20px; /* Adjust the margin-top as needed */
+    text-align: center; /* Center the heading */
+    position: absolute; /* Position the heading absolutely */
+    top: 60px; /* Adjust the top position */
+    left: 34%; /* Center the heading horizontally */
+    transform: translateX(-50%); /* Center the heading horizontally */
+    z-index: 999; /* Ensure the heading is on top */
+}
+
+.background-layer {
+    width: 1460px;
+    height: 1010px;
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    background: #5955B3;
+}
+
+.content-layer {
+    width: 1152px;
+    height: 969px;
+    left: 268px;
+    top: 16px;
+    position: absolute;
+    background: white;
+    border-radius: 50px;
+}
+
+
+
+.title, .text {
+    color: white;
+    font-size: 24px;
+    font-family: Inter;
+    font-weight: 600;
+    word-wrap: break-word;
+    position: absolute;
+    left: 64px; /* Adjust as needed */
+}
+
+.title {
+    color: white;
+    font-size: 24px;
+    font-family: Inter;
+    font-weight: 600;
+    word-wrap: break-word;
+    position: absolute;
+    left: 54px;
+    top: 200px; /* Adjust the top position as needed */
+}
+.text {
+    top: auto; /* Will be overridden by inline style */
+}
+
+.button {
+    display: block; /* Change display to block */
+    padding: 10px 20px;
+    background-color: #ffffff;
+    color: #5955B3;
+    text-decoration: none;
+    border-radius: 25px;
+    text-align: center; 
+    margin-bottom: 40px; /* Increase margin between buttons */
+}
+
+.button:hover {
+    background-color: #E6E6F4;
+}
+
+
+.notification-icon {
+    position: absolute;
+    top: 55px; /* Adjust as needed */
+    right: 120px; /* Adjust as needed */
+    width: 30px; /* Adjust as needed */
+    height: auto; /* Maintain aspect ratio */
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+.user-picture {
+    position: absolute;
+    top: 55px; /* Adjust as needed */
+    right: 70px; /* Adjust as needed */
+    width: 30px; /* Adjust as needed */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 50%; /* Make it circular if needed */
+    z-index: 999; /* Ensure it's below notification icon */
+}
+
+
+.widget {
+    width: 429px;
+    height: 200px;
+    left: 343px;
+    position: absolute;
+    border-radius: 43px;
+    transition: transform 0.3s ease;
+}
+
+.widget:hover {
+    transform: translateY(-10px);
+}
+
+.widget img {
+    margin-top: 15px;
+    margin-left: 15px;
+    max-width: 40%; /* Adjust the maximum width as needed */
+    max-height: 90%; /* Adjust the maximum height as needed */
+    vertical-align: middle; /* To vertically align the image */
+}
+
+.widget a {
+    display: block;
+    text-decoration: none; /* Remove default hyperlink styling */
+}
+
+.widget div {
+    position: absolute;
+    top: 20px;
+    left: 0; /* Adjusted to start from the left */
+    padding-left: 200px; /* Adjusted padding-left */
+    width: 200px; /* Adjust width as needed */
+}
+
+.widget h3 {
+    margin: 20px 0; /* Adjusted margin */
+    color: #000; /* Text color */
+    font-size: 24px; /* Adjusted font size */
+}
+
+.widget p {
+    margin: 10px 0; /* Adjusted margin */
+    color: #000; /* Text color */
+    
+}
+
+
+
+.widget div a img {
+    width: 30px; /* Adjust the size of the icon */
+    margin-top: 10px; /* Adjust the margin-top to position it lower */
+    
+    margin-left: 150px; /* Adjust the margin-left to position it a little to the right */
+    transition: transform 0.3s ease; /* Add transition effect */
+}
+
+.widget div a img:hover {
+    transform: scale(0.9) translateX(5px); /* Add hover effect to make it smaller and move a little to the right */
+}
+.indicator {
+    width: 10px;
+    height: 10px;
+    background-color: rgb(242, 242, 242); /* Adjust color as needed */
+    border-radius: 50%;
+    position: absolute;
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%);
+    right: 140px; /* Adjust distance from the right side */
+}
+
+.side-panel {
+    width: 458px;
+    height: 966px;
+    left: 962px;
+    top: 17px;
+    position: absolute;
+    background: #F6F4FE;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+.calendar-container {
+    background: #fff;
+    width: 400px;
+    margin-top: 120px; /* Adjust this value to move the calendar box lower */
+    margin-left: 30px;
+    border-radius: 10px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+.calendar-container header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+}
+
+.calendar-header .material-symbols-rounded {
+    height: 38px;
+    width: 38px;
+    margin: 0 5px;
+    cursor: pointer;
+    text-align: center;
+    line-height: 38px;
+    border-radius: 50%;
+    user-select: none;
+    color: #aeabab;
+    font-size: 1.9rem;
+}
+
+.calendar-current-date {
+    font-weight: 500;
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.calendar-body {
+    padding: 0 20px;
+}
+
+.calendar-weekdays {
+    list-style: none;
+    display: flex;
+    justify-content: space-around; /* Adjust alignment of days */
+    padding: 10px 0; /* Adjust padding */
+}
+
+.calendar-weekdays li {
+    width: calc(100% / 7);
+    text-align: center;
+    color: #666;
+}
+
+.calendar-dates {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; /* Adjust alignment of dates */
+    padding: 0; /* Remove default padding */
+}
+
+.calendar-dates li {
+    width: calc(100% / 7);
+    text-align: center;
+    padding: 10px 0; /* Adjust padding */
+    margin: 5px 0; /* Adjust margin */
+    cursor: pointer;
+}
+
+.calendar-dates li:hover {
+    background-color: #f0f0f0;
+}
+
+.active {
+    background-color: #6332c5;
+    color: #fff;
+    border-radius: 50%;
+}
+
+
+
