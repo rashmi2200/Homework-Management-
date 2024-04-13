@@ -80,12 +80,23 @@
         gap: 20px;
       }
 
-      .content h2 {
+      /* .content h2 {
         color: #ffffff;
       }
 
       .content p {
         color: #ffffff;
+      } */
+      .card-content h3 {
+        color: #ffffff; /* Change color to white */
+        font-family: Inter;
+        font-size: 24px;
+        
+      }
+      
+      .card-content p {
+       color: #393636; /* Change color to white */
+       flex: 1; 
       }
 
       .card-container {
@@ -97,6 +108,8 @@
         transition: transform 0.3s;
         background-color: #5955b3;
         position: relative;
+        display: flex;
+        align-items: center; 
       }
 
       .card-container:hover {
@@ -104,7 +117,24 @@
       }
 
       .card-content {
-        padding: 20px;
+      padding: 20px;
+      display: flex;
+      flex-direction: row; /* Lay out items in a row */
+      align-items: center; /* Align items vertically */
+      }
+
+            
+      .card-content .herald {
+       /* Styles specific to the image (herald) */
+       margin-right: 20px; /* Add margin to separate the image from the text */
+       }
+
+      .card-content img {
+      margin-right: 20px; /* Add margin to separate the image from the text */
+      }
+      .card-content > div {
+      margin-right: 20px; /* Adjust margin to move content to the left */
+  
       }
 
       .card-icon {
@@ -114,14 +144,17 @@
         transform: translateX(-50%); /* Center the icon horizontally */
         height: 40px;
         width: 40px;
+        transition: transform 0.3s, filter 0.3s;
       }
+      .card-icon:hover {
+       transform: translateX(-50%) scale(1.2); /* Increase the size on hover */
+       filter: brightness(1.2); /* Adjust brightness on hover */
+       }
 
       .herald {
-        position: absolute;
-        top: 30px;
-        left: 70%;
-        height: 100px;
-        width: 100px;
+        
+        height: 120px;
+        width: 120px;
         border-radius: 50%;
       }
 
@@ -275,36 +308,47 @@
 
         <div class="content">
           <div class="card-container">
-            <a href="English.html" class="card">
-              <img src="image/english.png" alt="pic" class="herald" />
+            <div class="card">
               <div class="card-content">
-                <p>4NCC01-English</p>
-                <p>Class 12</p>
+                <img src="image/english.png" alt="pic" class="herald" />
+                <div>
+                  <h3>English</h3>
+                  <p>A subject focused on language, literature, and communication.</p>
+                </div>
               </div>
-              <img src="image/work.png" alt="Icon1" class="card-icon" />
-            </a>
+              <img src="image/work.png" alt="Icon1" class="card-icon" onclick="redirectTo('English.html')" />
+            </div>
           </div>
+        
           <div class="card-container">
-            <a href="Science.html" class="card">
-              <img src="image/science.png" alt="pic" class="herald" />
+            <div class="card">
               <div class="card-content">
-                <p>4NCC02-Science</p>
-                <p>Class 12</p>
+                <img src="image/science.png" alt="pic" class="herald" />
+                <div>
+                  <h3>Science</h3>
+                  <p>Study of the world, including physics, chemistry & biology.</p>
+                </div>
               </div>
-              <img src="image/work.png" alt="Icon2" class="card-icon" />
-            </a>
+              <img src="image/work.png" alt="Icon2" class="card-icon" onclick="redirectTo('Science.html')" />
+            </div>
           </div>
+        
           <div class="card-container">
-            <a href="Social.html" class="card">
-              <img src="image/social.png" alt="pic" class="herald" />
+            <div class="card">
               <div class="card-content">
-                <p>4NCC06-Social</p>
-                <p>Class 12</p>
+                <img src="image/social.png" alt="pic" class="herald" />
+                <div>
+                  <h3>Social Studies</h3>
+                  <p>Examines human society, culture, and relationships.</p>
+                </div>
               </div>
-              <img src="image/work.png" alt="Icon2" class="card-icon" />
-            </a>
+              <img src="image/work.png" alt="Icon3" class="card-icon" onclick="redirectTo('Social.html')" />
+            </div>
           </div>
         </div>
+
+
+        
         <div class="wrapper">
           <div class="container-calendar">
             <h3 id="monthAndYear"></h3>

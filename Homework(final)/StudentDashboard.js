@@ -1,3 +1,10 @@
+
+
+function redirectTo(page) {
+  window.location.href = page;
+}
+
+
 function generate_year_range(start, end) {
     var years = "";
     for (var year = start; year <= end; year++) {
