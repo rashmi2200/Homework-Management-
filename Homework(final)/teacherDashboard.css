@@ -70,6 +70,11 @@ h1 {
 .text {
     top: auto; /* Will be overridden by inline style */
 }
+.title .button:hover {
+    background-color: #f0f0f0; /* Change background color on hover */
+    color: #333; /* Change text color on hover */
+  }
+  
 
 .button {
     display: block; /* Change display to block */

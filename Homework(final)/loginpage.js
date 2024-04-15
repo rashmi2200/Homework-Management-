@@ -103,7 +103,11 @@ document.getElementById('login-form').addEventListener('submit', async function(
             } else if (data.role === "Student") {
                 console.log('Redirecting to student dashboard...');
                 window.location.href = '/StudentDashboard.html';
-            } else {
+            } 
+            else if (data.role === "Admin") {
+            console.log('Redirecting to admin dashboard...');
+            window.location.href = '/AdminDashboard.html';
+            }else {
                 console.log('Unknown role:', data.role);
                 // Handle unknown role scenario
             }
