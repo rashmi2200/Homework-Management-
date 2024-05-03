@@ -105,20 +105,21 @@
 
     
 
-    <Script> document.getElementById('customFileUpload').addEventListener('click', function() {
-        document.getElementById('assignmentFileUpload').click();
-    });
-    function displayFileName() {
-    const fileInput = document.getElementById('fileInput');
-    const assignmentFileLink = document.getElementById('assignmentFileLink');
-    if (fileInput.files.length > 0) {
-        assignmentFileLink.value = fileInput.files[0].name;
-    } else {
-        assignmentFileLink.value = '';
-    }
-}
+    <script>
+        document.querySelector('.custom-file-upload').addEventListener('click', function() {
+            document.getElementById('fileInput').click();
+        });
 
-    </Script>
+        function displayFileName() {
+            const fileInput = document.getElementById('fileInput');
+            const assignmentFileLink = document.getElementById('assignmentFileLink');
+            if (fileInput.files.length > 0) {
+                assignmentFileLink.value = fileInput.files[0].name;
+            } else {
+                assignmentFileLink.value = '';
+            }
+        }
+    </script>
     <script src="TeacherAssignment.js"></script>
     
 </body>

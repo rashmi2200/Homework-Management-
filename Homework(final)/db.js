@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const User = require('./models/userModel');
 const cors = require("cors");
+const Assignment = require('./models/assignmentModel'); // Import Assignment model
 
 // MongoDB connection string
 app.use(cors({
@@ -104,6 +105,79 @@ app.post('/login', async (req, res) => {
 //         return res.status(500).json({ message: "Internal server error" });
 //     }
 // });
+
+
+//CREATE ASSIGNMENT PORTAL DATABASE
+//Route for handling assignment creation
+// app.post('/createAssignment', async (req, res) => {
+//     try {
+//         // Retrieve assignment data from request body
+//         const { title, details, fileLink, deadline, subject } = req.body;
+
+//         // Create new assignment document
+//         const newAssignment = new Assignment({
+//             title: title,
+//             details: details,
+//             fileLink: fileLink,
+//             deadline: deadline,
+//             subject: subject
+//         });
+
+//         // Save the assignment to the database
+//         await newAssignment.save();
+
+//         // Send success response
+//         res.status(201).json({ message: 'Assignment created successfully' });
+//     } catch (error) {
+//         console.error('Error creating assignment:', error);
+//         res.status(500).json({ message: 'Internal server error' });
+//     }
+// });
+
+
+// Route for handling assignment creation
+app.post('/createAssignment', async (req, res) => {
+    try {
+        // Retrieve assignment data from request body
+        const { title, details, fileLink, deadline, subject } = req.body;
+
+        // Create new assignment document
+        const result =  await Assignment.create({
+            title,
+            details,
+            fileLink,
+            deadline,
+            subject
+        });
+        console.log("result::",result);
+        if(result){
+            // Send success response
+            res.status(200).json({ message: 'Assignment created successfully' });
+            
+        }
+
+        // Save the assignment to the database
+        // await newAssignment.save();
+
+    } catch (error) {
+        console.error('Error creating assignment:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+//FOR FETCHING THE DATA FROM THE DATABASE ASSIGNMENT
+// Route for fetching assignments data
+app.get('/assignments', async (req, res) => {
+    try {
+        // Fetch all assignments from MongoDB
+        const assignments = await Assignment.find({});
+        res.status(200).json(assignments);
+    } catch (error) {
+        console.error('Error fetching assignments:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
 
 // Start the Express server
 const PORT = process.env.PORT || 3000;

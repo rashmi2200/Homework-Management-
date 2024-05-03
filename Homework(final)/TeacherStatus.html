@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="TeacherStudent.css">
+    <link rel="stylesheet" href="TeacherStatus.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
 </head>
@@ -20,9 +20,15 @@
         
         <!-- User picture -->
         <img src="image/user.jpg" alt="User Picture" class="user-picture">
+        
 
         
         <h1>Status</h1>
+        <table id="assignmentsTableContainer">
+            <tbody id="assignmentsBody">
+                <!-- Assignments will be dynamically inserted here -->
+            </tbody>
+        </table>
         
     </div>
     <div class="title">
@@ -32,5 +38,7 @@
         <a href="Teachergrade.html" class="button">Grade</a>
         <a href="loginpage.html" class="button" style="margin-top: 200px;">Logout</a>
     </div>
+    <script src="TeacherStatus.js"></script>
+
 </body>
 </html>

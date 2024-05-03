@@ -95,3 +95,96 @@ nextIcon.addEventListener("click", () => {
     }
     manipulate();
 });
+
+
+
+
+// for the database purpose of create assignment 
+// document.getElementById('createAssignmentBtn').addEventListener('click', async function() {
+//     const assignmentTitle = document.getElementById('assignmentTitle').value;
+//     const assignmentDetails = document.getElementById('assignmentDetails').value;
+//     const assignmentFileLink = document.getElementById('assignmentFileLink').value;
+//     const deadlineDate = document.getElementById('deadlineDate').value;
+//     const deadlineTime = document.getElementById('deadlineTime').value;
+//     const subject = document.getElementById('subjectDropdown').value;
+
+//     const assignmentData = {
+//         title: assignmentTitle,
+//         details: assignmentDetails,
+//         fileLink: assignmentFileLink,
+//         deadline: {
+//             date: deadlineDate,
+//             time: deadlineTime
+//         },
+//         subject: subject
+//     };
+
+//     try {
+//         const response = await fetch('/createAssignment', {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify(assignmentData)
+//         });
+
+//         if (response.ok) {
+//             // Assignment created successfully
+//             console.log('Assignment created successfully');
+//         } else {
+//             // Error creating assignment
+//             console.error('Failed to create assignment');
+//         }
+//     } catch (error) {
+//         console.error('Error creating assignment:', error);
+//     }
+// });
+// Add event listener for form submission
+document.getElementById('createAssignmentBtn').addEventListener('click', async function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Get form data
+    const title = document.getElementById('assignmentTitle').value;
+    const details = document.getElementById('assignmentDetails').value;
+    const fileLink = document.getElementById('assignmentFileLink').value;
+    const deadlineDate = document.getElementById('deadlineDate').value;
+    const deadlineTime = document.getElementById('deadlineTime').value;
+    const subject = document.getElementById('subjectDropdown').value;
+
+    // Combine date and time into a single deadline string
+    const deadline = new Date(`${deadlineDate}T${deadlineTime}`);
+
+    // Prepare assignment data to send in the request body
+    const assignmentData = {
+        title,
+        details,
+        fileLink,
+        deadline,
+        subject
+    };
+
+    // Send POST request to create assignment
+    try {
+        const response = await fetch('http://localhost:3000/createAssignment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(assignmentData)
+        });
+
+        // Check if request was successful
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data.message); // Log success message
+            // Show pop-up saying "Assignment Created Successfully"
+            alert('Assignment Created Successfully');
+        } else {
+            console.error('Failed to create assignment');
+            // Optionally, you can display an error message to the user
+        }
+    } catch (error) {
+        console.error('Error creating assignment:', error);
+        // Optionally, you can display an error message to the user
+    }
+});
