@@ -109,8 +109,17 @@ h1 {
     border-radius: 50%; /* Make it circular if needed */
     z-index: 999; /* Ensure it's below notification icon */
 }
-
-
+.edit-icon {
+    color: #5955B3;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.edit-icon:hover {
+    color: #000000; /* Change color on hover */
+}
 /*TABLE*/
 /* CSS for table */
 table {

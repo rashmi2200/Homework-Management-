@@ -149,6 +149,9 @@ app.post('/createAssignment', async (req, res) => {
             deadline,
             subject
         });
+
+        // const assignmentId = newAssignment._id;
+        
         console.log("result::",result);
         if(result){
             // Send success response
@@ -175,6 +178,26 @@ app.get('/assignments', async (req, res) => {
     } catch (error) {
         console.error('Error fetching assignments:', error);
         res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+// Route for fetching assignment details
+app.get('/assignment', async (req, res) => {
+    const { title, subject } = req.query;
+
+    try {
+        // Find the assignment with the provided title and subject in the database
+        const assignment = await Assignment.findOne({ title, subject });
+
+        if (!assignment) {
+            return res.status(404).json({ message: "Assignment not found" });
+        }
+
+        // If assignment is found, return its details
+        return res.status(200).json(assignment);
+    } catch (error) {
+        console.error("Error fetching assignment details:", error);
+        return res.status(500).json({ message: "Internal server error" });
     }
 });
 
