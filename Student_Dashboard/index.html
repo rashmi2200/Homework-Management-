@@ -10,10 +10,10 @@
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 0;
-        background-color: rgb(249, 252, 251);
+        background-color: rgb(244, 246, 245);
       }
-      /* Sidebar */
 
+      /* Sidebar */
       .sidebar {
         height: 100%;
         width: 250px;
@@ -21,11 +21,11 @@
         top: 0;
         left: 0;
         padding-top: 20px;
-        background-color: #32be8f;
+        background-color: #aaa7e3;
         align-items: center;
       }
       .sidebar h2 {
-        color: #100f0f;
+        color: #ffffff;
         text-align: center;
         margin-bottom: 30px;
       }
@@ -46,10 +46,11 @@
         font-size: 1.1rem;
         font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
         background-color: #f7f7f7;
+        color: #5955b3;
       }
-      .sidebar ul li button:hover {
-        background-color: rgb(231, 166, 211);
-        transform: scale(1.05);
+      .flex button:hover {
+        background-color: #f0f0f0; /* Change background color on hover */
+        color: #333; /* Change text color on hover */
       }
 
       .Dashboard {
@@ -62,6 +63,7 @@
       .dd {
         font-size: 1rem;
         margin-left: 30px;
+        color: rgb(255, 255, 255);
       }
 
       .Logout {
@@ -76,23 +78,35 @@
         gap: 20px;
       }
 
-      .content h2 {
-        color: #070606;
+      /* .content h2 {
+        color: #ffffff;
       }
 
       .content p {
-        color: #070606;
+        color: #ffffff;
+      } */
+      .card-content h3 {
+        color: #ffffff; /* Change color to white */
+        font-family: Inter;
+        font-size: 24px;
+      }
+
+      .card-content p {
+        color: #393636; /* Change color to white */
+        flex: 1;
       }
 
       .card-container {
         width: 400px;
-        height: 250px;
+        height: 200px;
         margin-top: 80px;
         border-radius: 20px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s;
-        background-color: #32be8f;
+        background-color: #aaa7e3;
         position: relative;
+        display: flex;
+        align-items: center;
       }
 
       .card-container:hover {
@@ -101,23 +115,40 @@
 
       .card-content {
         padding: 20px;
+        display: flex;
+        flex-direction: row; /* Lay out items in a row */
+        align-items: center; /* Align items vertically */
+      }
+
+      .card-content .herald {
+        /* Styles specific to the image (herald) */
+        margin-right: 20px; /* Add margin to separate the image from the text */
+      }
+
+      .card-content img {
+        margin-right: 20px; /* Add margin to separate the image from the text */
+      }
+      .card-content > div {
+        margin-right: 20px; /* Adjust margin to move content to the left */
       }
 
       .card-icon {
         position: absolute;
-        bottom: 10px; /* Adjust the position of the icon */
-        left: 80%;
+        bottom: 20px; /* Adjust the position of the icon */
+        left: 90%;
         transform: translateX(-50%); /* Center the icon horizontally */
-        height: 20px;
-        width: 20px;
+        height: 40px;
+        width: 40px;
+        transition: transform 0.3s, filter 0.3s;
+      }
+      .card-icon:hover {
+        transform: translateX(-50%) scale(1.2); /* Increase the size on hover */
+        filter: brightness(1.2); /* Adjust brightness on hover */
       }
 
       .herald {
-        position: absolute;
-        top: 50px;
-        left: 50%;
-        height: 90px;
-        width: 90px;
+        height: 120px;
+        width: 120px;
         border-radius: 50%;
       }
 
@@ -144,7 +175,7 @@
         max-height: fit-content;
         display: flex;
         align-content: center;
-        color: black;
+        color: rgb(255, 255, 255);
       }
 
       .container-calendar {
@@ -152,15 +183,16 @@
         max-width: 800px;
         margin: 0 auto;
         overflow: auto;
-        background-color: #32be8f;
+        background-color:  #aaa7e3;;
+        margin-left: 230px;
       }
 
       .button-container-calendar button {
         cursor: pointer;
         display: inline-block;
         zoom: 1;
-        background: #00a2b7;
-        color: #fff;
+        background: #fcfcfc;
+        color: #5955b3;
         border: 1px solid #0aa2b5;
         border-radius: 4px;
         padding: 5px 10px;
@@ -252,42 +284,97 @@
               <button type="Home">Home</button>
             </li>
             <li>
+              <a href="notice.html">
               <button>Noticeboard</button>
             </li>
+          </a>
             <li>
+              <a href="to-do.html">
               <button type="todo">To-Do</button>
             </li>
+          </a>
             <li>
+              <a href="setting.html">
               <button>Settings</button>
             </li>
+          </a>
             <li>
-              <button class="Logout">Logout</button>
+              <button
+                class="Logout"
+                onclick="window.location.href='Login.html'">
+                Logout
+              </button>
             </li>
           </ul>
         </div>
 
         <div class="content">
           <div class="card-container">
-            <a href="English.html" class="card">
-              <img src="herald.png" alt="pic" class="herald" />
+            <a href="English.html">
+            <div class="card">
               <div class="card-content">
-                <p>4NCC01-English</p>
-                <p>Class 12</p>
+                <img src="english.png" alt="pic" class="herald" />
+                <div>
+                  <h3>English</h3>
+                  <p>
+                    A subject focused on language, literature, and
+                    communication.
+                  </p>
+                </div>
               </div>
-              <img src="work.png" alt="Icon1" class="card-icon" />
-            </a>
+              <img
+                src="work.png"
+                alt="Icon1"
+                class="card-icon"
+                onclick="redirectTo('English.html')"
+              />
+            </div>
+          </a>
           </div>
+
           <div class="card-container">
-            <a href="Science.html" class="card">
-              <img src="herald.png" alt="pic" class="herald" />
+            <a href="Science.html">
+            <div class="card">
               <div class="card-content">
-                <p>4NCC02-Science</p>
-                <p>Class 12</p>
+                <img src="science.png" alt="pic" class="herald" />
+                <div>
+                  <h3>Science</h3>
+                  <p>
+                    Study of the world, including physics, chemistry & biology.
+                  </p>
+                </div>
               </div>
-              <img src="work.png" alt="Icon2" class="card-icon" />
-            </a>
+              <img
+                src="work.png"
+                alt="Icon2"
+                class="card-icon"
+                onclick="redirectTo('science.html')"
+              />
+            </div>
+          </a>
+          </div>
+
+          <div class="card-container">
+            <a href="social.html">
+            <div class="card">
+              <div class="card-content">
+                <img src="social.png" alt="pic" class="herald" />
+                <div>
+                  <h3>Social Studies</h3>
+                  <p>Examines human society, culture, and relationships.</p>
+                </div>
+              </div>
+              <img
+                src="work.png"
+                alt="Icon3"
+                class="card-icon"
+                onclick="redirectTo('Social.html')"
+              />
+            </div>
+          </a>
           </div>
         </div>
+
         <div class="wrapper">
           <div class="container-calendar">
             <h3 id="monthAndYear"></h3>
