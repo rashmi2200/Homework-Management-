@@ -204,7 +204,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Assignment Portal</title>
+    <title>Settings - Assignment Portal</title>
     <style>
       /* Reset CSS */
       * {
@@ -213,7 +213,7 @@
         padding: 0;
       }
 
-      * body {
+      body {
         font-family: Arial, sans-serif;
         background-color: #f9f9f9;
       }
@@ -243,7 +243,7 @@
         top: 0;
         left: 0;
         padding-top: 20px;
-        background-color:#aaa7e3;
+        background-color: #aaa7e3;
         align-items: center;
       }
 
@@ -280,12 +280,56 @@
         background-color: #e9c3dc;
         transform: scale(1.05);
       }
+
       .Logout {
         margin-top: 70px;
       }
 
-     
+      /* Settings Styles */
+      .settings-container {
+        margin-left: 300px; /* Adjust according to sidebar width */
+        padding: 20px;
+      }
 
+      .settings-header {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+
+      .setting-card {
+        background-color: #aaa7e3;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-bottom: 20px;
+        margin-right: 30rem;
+      }
+
+      .setting-card label {
+        font-weight: bold;
+        margin-bottom: 10px;
+        display: block;
+      }
+
+      .setting-card input[type="text"] {
+        width: 30rem; /* Adjust according to padding */
+        padding: 8px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+
+      .save-button {
+        padding: 10px 20px;
+        background-color: #9f7cdc;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .save-button:hover {
+        background-color: #88baef;
+      }
     </style>
   </head>
   <body>
@@ -297,32 +341,53 @@
         <img src="profile.png" alt="Profile" width="40" height="40" />
       </a>
     </div>
-      <div class="sidebar">
-        <img src="Herald.png" alt="pic" class="Dashboard" />
-        <ul>
-          <li>
-            <a href="index.html">
+
+    <div class="Sidebar">
+      <img src="Herald.png" alt="pic" class="Dashboard" />
+      <ul>
+        <li>
+          <a href="index.html">
             <button type="Home">Home</button>
-          </li>
-        </a>
-          <li>
-            <a href="notice.html">
+          </a>
+        </li>
+        <li>
+          <a href="notice.html">
             <button>Noticeboard</button>
-          </li>
           </a>
-          <li>
-            <a href="to-do.html">
-            <button>To-Do </button>
-          </li>
+        </li>
+        <li>
+          <a href="to-do.html">
+            <button>To-Do</button>
           </a>
-          <li>
-            <a href="setting.html">
+        </li>
+        <li>
+          <a href="setting.html">
             <button>Settings</button>
-          </li>
-          <li>
-            <button class="Logout">Logout</button>
-          </li>
-        </ul>
+          </a>
+        </li>
+        <li>
+          <button class="Logout" onclick="window.location.href='Login.html'">
+            Logout
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="settings-container">
+      <h2 class="settings-header">Settings</h2>
+      <div class="setting-card">
+        <label for="full-name">Full Name:</label>
+        <input type="text" id="full-name" name="full-name" />
       </div>
+      <div class="setting-card">
+        <label for="phone-number">Phone Number:</label>
+        <input type="text" id="phone-number" name="phone-number" />
+      </div>
+      <div class="setting-card">
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" />
+      </div>
+      <button class="save-button">Save Changes</button>
+    </div>
   </body>
 </html>

@@ -38,10 +38,10 @@ document.addEventListener("DOMContentLoaded", function () {
         // Display login message
         document.getElementById("login-message").innerText = data.message;
 
-        // Redirect user to teacher dashboard if login successful
+        // Redirect user to student dashboard if login successful
         if (data.success) {
-          console.log("Login successful. Redirecting to teacher dashboard...");
-          window.location.href = "/teacherDashboard.html";
+          console.log("Login successful. Redirecting to student dashboard...");
+          window.location.href = "/index.html";
         } else {
           console.log("Login failed. Please check your email and password.");
         }
