@@ -1,12 +1,15 @@
-// Function to save settings
-function saveSettings() {
-  const darkMode = document.getElementById("dark-mode-toggle").checked;
-  const language = document.getElementById("language-select").value;
-  const name = document.getElementById("name-input").value;
+function saveChanges() {
+  // Get values from input fields
+  var fullName = document.getElementById("full-name").value;
+  var phoneNumber = document.getElementById("phone-number").value;
+  var location = document.getElementById("location").value;
 
-  // Normally you would save these settings somewhere, for example in localStorage or send them to a server
-  console.log("Settings saved:");
-  console.log("Dark Mode:", darkMode);
-  console.log("Language:", language);
-  console.log("Name:", name);
+  // Check if all fields are filled
+  if (fullName && phoneNumber && location) {
+    // Show success popup
+    alert("Changes saved successfully!");
+  } else {
+    // Show error message if any field is empty
+    alert("Please fill in all fields.");
+  }
 }
