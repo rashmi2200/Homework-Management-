@@ -10,7 +10,7 @@
 <body>
   <header>
     <div class="background"></div>
-      <h1>Student</h1>
+     <h1>Teacher</h1>
      <div class="content-layer">
       <!-- Notification icon -->
       <a href="#"><i class="fa-regular fa-bell fa-lg"></i></a>  
@@ -30,8 +30,24 @@
           </div>
     </nav>
     <main class="content-area">
-      <div class="add">
-        <a href="AddStudent.html" class="button"><i class="fa-solid fa-user-plus"></i> Add Student</a>
+      <div class="box">
+        <form id="teacher-form">
+          <div class="input-group">
+            <label for="teacher-name">Teacher Name:</label>
+            <input type="text" id="teacher-name" name="teacher-name" required>
+          </div>
+          <div class="input-group">
+            <label for="teacher-email">Email:</label>
+            <input type="email" id="teacher-email" name="teacher-email" required>
+          </div>
+          <div class="input-group">
+            <label for="teacher-phone">Phone:</label>
+            <input type="tel" id="teacher-phone" name="teacher-phone" required>
+          </div>
+          <div class="submit">
+            <button type="submit">Add Teacher</button>
+          </div>
+        </form>
       </div>
     </main>
   </section>

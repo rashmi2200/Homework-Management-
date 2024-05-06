@@ -9,7 +9,7 @@ const Assignment = require('./models/assignmentModel'); // Import Assignment mod
 
 // MongoDB connection string
 app.use(cors({
-    origin: ['http://127.0.0.1:5500', "http://localhost:5500"],
+    origin: ['http://127.0.0.1:5501', "http://localhost:5501"],
     credentials: true 
 }));
 
@@ -149,6 +149,9 @@ app.post('/createAssignment', async (req, res) => {
             deadline,
             subject
         });
+
+        // const assignmentId = newAssignment._id;
+        
         console.log("result::",result);
         if(result){
             // Send success response
@@ -175,6 +178,82 @@ app.get('/assignments', async (req, res) => {
     } catch (error) {
         console.error('Error fetching assignments:', error);
         res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+// Route for fetching assignment details
+app.get('/assignment', async (req, res) => {
+    const { title, subject } = req.query;
+
+    try {
+        // Find the assignment with the provided title and subject in the database
+        const assignment = await Assignment.findOne({ title, subject });
+
+        if (!assignment) {
+            return res.status(404).json({ message: "Assignment not found" });
+        }
+
+        // If assignment is found, return its details
+        return res.status(200).json(assignment);
+    } catch (error) {
+        console.error("Error fetching assignment details:", error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+});
+
+
+// app.put('/update_assignment', async (req, res) => {
+//     const { title, subject } = req.query; // Extract title and subject from query parameters
+//     const updatedData = req.body; // Extract updated data from request body
+
+//     try {
+//         // Find the assignment with the provided title and subject in the database
+//         let assignment = await Assignment.findOne({ title, subject });
+
+//         if (!assignment) {
+//             return res.status(404).json({ message: "Assignment not found" });
+//         }
+
+//         // Update assignment fields with the provided data
+//         for (let key in updatedData) {
+//             if (updatedData.hasOwnProperty(key)) {
+//                 assignment[key] = updatedData[key];
+//             }
+//         }
+
+//         // Save the updated assignment to the database
+//         assignment = await assignment.save();
+
+//         // If assignment is updated successfully, return its updated details
+//         return res.status(200).json(assignment);
+//     } catch (error) {
+//         console.error("Error updating assignment details:", error);
+//         return res.status(500).json({ message: "Internal server error" });
+//     }
+// });
+// Route for updating assignment details
+app.put('/update_assignment', async (req, res) => {
+    const { title, subject } = req.query; // Extract title and subject from query parameters
+    const updatedData = req.body; // Extract updated data from request body
+
+    console.log('Received title:', title);
+    console.log('Received subject:', subject);
+    console.log('Received updated data:', updatedData);
+
+    try {
+        // Update the assignment with the provided title and subject in the database
+        const result = await Assignment.updateOne({ title, subject }, updatedData);
+
+        if (result.n === 0) {
+            // If no assignment is found, return error
+            return res.status(404).json({ message: "Assignment not found" });
+        }
+
+        // If assignment is updated successfully, return success message
+        return res.status(200).json({ message: "Assignment updated successfully" });
+    } catch (error) {
+        console.error("Error updating assignment details:", error);
+        return res.status(500).json({ message: "Internal server error" });
     }
 });
 

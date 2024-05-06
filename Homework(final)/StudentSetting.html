@@ -1,0 +1,394 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .container {
+        display: flex;
+      }
+
+      .sidebar {
+        height: 100%;
+        width: 250px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding-top: 20px;
+        background-color: #837edd;
+        align-items: center;
+      }
+
+      .sidebar ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 15px;
+      }
+      .sidebar ul li {
+        display: flex;
+        align-items: center;
+        padding: 20px 20px;
+      }
+
+      .sidebar ul li button {
+        border-radius: 100px;
+        height: 35px;
+        width: 120px;
+        font-size: 1.1rem;
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        background-color: #f7f7f7;
+      }
+
+      .sidebar ul li button:hover {
+        color: rgb(232, 96, 189);
+        transition: 0.1s;
+      }
+
+      .Dashboard {
+        border-radius: 50%;
+        height: 100px;
+        width: 100px;
+        margin-left: 50px;
+      }
+
+      .Logout {
+        margin-top: 70px;
+      }
+
+      .top-right {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      .top-right img {
+        margin-left: 10px;
+      }
+
+      .top-right button:hover {
+        color: #f3eeee;
+      }
+
+      /* Assignment portal */
+      .assign {
+        max-width: 800px;
+        margin: 80px auto;
+        padding: 20px;
+        margin-right: 15rem;
+        background-color: #9795ea;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      /* Form styles */
+      form {
+        margin-top: 20px;
+      }
+
+      input[type="text"],
+      textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #f9f3f3;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      input[type="file"] {
+        margin-top: 5px;
+      }
+
+      input[type="submit"] {
+        background-color: #4caf50;
+        color: rgb(254, 253, 253);
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top-right">
+      <a href=" " target="_blank">
+        <img src="notification.png" alt="Notification" width="30" height="30" />
+      </a>
+      <a href="https://mail.google.com/mail/u/1/#inbox" target="_blank">
+        <img src="profile.png" alt="Profile" width="40" height="40" />
+      </a>
+    </div>
+    <div class="container">
+      <div class="sidebar">
+        <img src="Herald.png" alt="pic" class="Dashboard" />
+        <ul>
+          <li>
+            <a href="index.html" class="card">
+              <button type="Home">Home</button>
+            </a>
+          </li>
+          <li>
+            <a href="index.html" class="card">
+              <button>Noticeboard</button>
+            </a>
+          </li>
+          <li>
+            <a href="index.html" class="card">
+              <button>To-Do</button>
+            </a>
+          </li>
+          <li>
+            <a href="index.html" class="card">
+              <button>Settings</button>
+            </a>
+          </li>
+          <li>
+            <button class="Logout">Logout</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="assign">
+      <h1>Assignment Portal</h1>
+
+      <form
+        enctype="multipart/form-data"
+        action="/submit_assignment"
+        method="post"
+      >
+        <label for="assignmentTitle">Assignment Title:</label>
+        <input type="text" id="assignmentTitle" name="assignmentTitle" />
+
+        <label for="instructions">Instructions:</label>
+        <textarea id="instructions" name="instructions" rows="4"></textarea>
+
+        <label for="dueDate">Due Date:</label>
+        <input
+          type="text"
+          id="dueDate"
+          name="dueDate"
+          placeholder="YYYY-MM-DD"
+        />
+
+        <label for="file">Upload File:</label>
+        <input type="file" id="file" name="file" />
+
+        <input type="submit" value="Create Assignment" />
+      </form>
+    </div>
+  </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings - Assignment Portal</title>
+    <style>
+      /* Reset CSS */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+      }
+
+      /* Top right icons */
+      .top-right {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+      }
+
+      .top-right img {
+        margin-left: 10px;
+        border-radius: 50%;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .top-right img:hover {
+        transform: scale(1.1);
+      }
+
+      /* sidebar */
+      .Sidebar {
+        height: 100%;
+        width: 250px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding-top: 20px;
+        background-color: #aaa7e3;
+        align-items: center;
+      }
+
+      .Dashboard {
+        border-radius: 50%;
+        height: 100px;
+        width: 100px;
+        margin-left: 75px;
+        margin-bottom: 20px;
+      }
+
+      .sidebar ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 15px;
+      }
+
+      .sidebar ul li {
+        display: flex;
+        align-items: center;
+        padding: 20px 20px;
+      }
+
+      .sidebar ul li button {
+        border-radius: 100px;
+        height: 35px;
+        width: 120px;
+        font-size: 1.1rem;
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        background-color: #f7f7f7;
+      }
+
+      .sidebar ul li button:hover {
+        background-color: #e9c3dc;
+        transform: scale(1.05);
+      }
+
+      .Logout {
+        margin-top: 70px;
+      }
+
+      /* Settings Styles */
+      .settings-container {
+        margin-left: 300px; /* Adjust according to sidebar width */
+        padding: 20px;
+      }
+
+      .settings-header {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+
+      .setting-card {
+        background-color: #aaa7e3;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-bottom: 20px;
+        margin-right: 30rem;
+      }
+
+      .setting-card label {
+        font-weight: bold;
+        margin-bottom: 10px;
+        display: block;
+      }
+
+      .setting-card input[type="text"] {
+        width: 30rem; /* Adjust according to padding */
+        padding: 8px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+
+      .save-button {
+        padding: 10px 20px;
+        background-color: #9f7cdc;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .save-button:hover {
+        background-color: #88baef;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top-right">
+      <a href="#" target="_blank">
+        <img src="notification.png" alt="Notification" width="30" height="30" />
+      </a>
+      <a href="https://mail.google.com/mail/u/1/#inbox" target="_blank">
+        <img src="profile.png" alt="Profile" width="40" height="40" />
+      </a>
+    </div>
+
+    <div class="Sidebar">
+      <img src="Herald.png" alt="pic" class="Dashboard" />
+      <ul>
+        <li>
+          <a href="StudentDashboard.html">
+            <button type="Home">Home</button>
+          </a>
+        </li>
+        <li>
+          <a href="notice.html">
+            <button>Noticeboard</button>
+          </a>
+        </li>
+        <li>
+          <a href="to-do.html">
+            <button>To-Do</button>
+          </a>
+        </li>
+        <li>
+          <a href="setting.html">
+            <button>Settings</button>
+          </a>
+        </li>
+        <li>
+          <button class="Logout" onclick="window.location.href='loginpage.html'">
+            Logout
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="settings-container">
+      <h2 class="settings-header">Settings</h2>
+      <div class="setting-card">
+        <label for="full-name">Full Name:</label>
+        <input type="text" id="full-name" name="full-name" />
+      </div>
+      <div class="setting-card">
+        <label for="phone-number">Phone Number:</label>
+        <input type="text" id="phone-number" name="phone-number" />
+      </div>
+      <div class="setting-card">
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" />
+      </div>
+      <button class="save-button" onclick="saveChanges()">Save Changes</button>
+    </div>
+    <script src="setting.js"></script>
+  </body>
+</html>
