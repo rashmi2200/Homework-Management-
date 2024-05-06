@@ -10,3 +10,10 @@ menuItems.forEach(menuItem => {
     }
   });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('teacher-form');
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    
