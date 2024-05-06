@@ -1,3 +1,34 @@
+// document.addEventListener('DOMContentLoaded', () => {
+//     const urlParams = new URLSearchParams(window.location.search);
+//     const title = urlParams.get('title');
+//     const subject = urlParams.get('subject');
+
+//     console.log('Title:', title);
+//     console.log('Subject:', subject);
+
+//     if (title && subject) {
+//         // Replace the existing fetch request with the updated one here
+//         fetch(`http://localhost:3000/assignment?title=${title}&subject=${subject}`)
+//             .then(response => {
+//                 if (!response.ok) {
+//                     throw new Error('Failed to fetch assignment data');
+//                 }
+//                 return response.json();
+//             })
+//             .then(assignment => {
+//                 console.log('Received assignment:', assignment);
+//                 if (!assignment) {
+//                     console.error('No assignment found for the specified title and subject');
+//                     return;
+//                 }
+//                 populateFormFields(assignment);
+//             })
+//             .catch(error => {
+//                 console.error('Error fetching assignment:', error);
+//             });
+//     } else {
+//         console.error('Title or subject missing in URL parameters');
+//     }
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const title = urlParams.get('title');
@@ -7,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Subject:', subject);
 
     if (title && subject) {
-        // Replace the existing fetch request with the updated one here
         fetch(`http://localhost:3000/assignment?title=${title}&subject=${subject}`)
             .then(response => {
                 if (!response.ok) {
@@ -22,6 +52,41 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
                 populateFormFields(assignment);
+
+                document.getElementById('createAssignmentBtn').addEventListener('click', () => {
+                    const assignmentData = {
+                        title: document.getElementById('assignmentTitle').value,
+                        details: document.getElementById('assignmentDetails').value,
+                        fileLink: document.getElementById('assignmentFileLink').value,
+                        deadline: document.getElementById('deadlineDate').value + ' ' + document.getElementById('deadlineTime').value,
+                        subject: document.getElementById('subjectDropdown').value
+                    };
+                
+                    console.log('Sending assignment data:', assignmentData); // Log assignmentData
+                
+                    fetch(`http://localhost:3000/update_assignment`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(assignmentData)
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Failed to update assignment data');
+                        }
+                        return response.json();
+                    })
+                    .then(updatedAssignment => {
+                        console.log('Assignment updated successfully:', updatedAssignment);
+                        alert('Assignment updated successfully!');
+                    })
+                    .catch(error => {
+                        console.error('Error updating assignment:', error);
+                        alert('Failed to update assignment. Please try again later.');
+                    });
+                });
+                
             })
             .catch(error => {
                 console.error('Error fetching assignment:', error);
@@ -29,6 +94,11 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         console.error('Title or subject missing in URL parameters');
     }
+});
+
+
+
+    
     function populateFormFields(assignment) {
     const assignmentTitleField = document.getElementById('assignmentTitle');
     if (assignmentTitleField) {
@@ -84,6 +154,10 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Subject dropdown field not found');
     }
 }
+
+
+
+
 
 
     
@@ -173,4 +247,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
     manipulate(); // Call manipulate function once after DOMContentLoaded
 
-});
