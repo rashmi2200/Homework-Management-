@@ -17,7 +17,7 @@ app.use(cors({
 const dbURI = "mongodb+srv://np03cs4a220511:j3wiuPl5QSgXY6Th@homework.k8lnaxo.mongodb.net/?retryWrites=true&w=majority&appName=homework";
 
 // Connect to MongoDB
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(dbURI); //, { useNewUrlParser: true, useUnifiedTopology: true }
 
 // Get the default connection
 const db = mongoose.connection;
@@ -201,61 +201,81 @@ app.get('/assignment', async (req, res) => {
     }
 });
 
-
+// Route for updating assignment details
 // app.put('/update_assignment', async (req, res) => {
 //     const { title, subject } = req.query; // Extract title and subject from query parameters
 //     const updatedData = req.body; // Extract updated data from request body
 
-//     try {
-//         // Find the assignment with the provided title and subject in the database
-//         let assignment = await Assignment.findOne({ title, subject });
+//     console.log('Received title:', title);
+//     console.log('Received subject:', subject);
+//     console.log('Received updated data:', updatedData);
 
-//         if (!assignment) {
+//     try {
+//         // Update the assignment with the provided title and subject in the database
+//         const result = await Assignment.updateOne({ title, subject }, updatedData);
+
+//         if (result.n === 0) {
+//             // If no assignment is found, return error
 //             return res.status(404).json({ message: "Assignment not found" });
 //         }
 
-//         // Update assignment fields with the provided data
-//         for (let key in updatedData) {
-//             if (updatedData.hasOwnProperty(key)) {
-//                 assignment[key] = updatedData[key];
-//             }
-//         }
-
-//         // Save the updated assignment to the database
-//         assignment = await assignment.save();
-
-//         // If assignment is updated successfully, return its updated details
-//         return res.status(200).json(assignment);
+//         // If assignment is updated successfully, return success message
+//         return res.status(200).json({ message: "Assignment updated successfully" });
 //     } catch (error) {
 //         console.error("Error updating assignment details:", error);
 //         return res.status(500).json({ message: "Internal server error" });
 //     }
 // });
-// Route for updating assignment details
+
+// Backend endpoint to update assignment
 app.put('/update_assignment', async (req, res) => {
     const { title, subject } = req.query; // Extract title and subject from query parameters
     const updatedData = req.body; // Extract updated data from request body
 
-    console.log('Received title:', title);
-    console.log('Received subject:', subject);
-    console.log('Received updated data:', updatedData);
-
     try {
-        // Update the assignment with the provided title and subject in the database
-        const result = await Assignment.updateOne({ title, subject }, updatedData);
+        // Find the assignment with the provided title and subject
+        const assignment = await Assignment.findOne({ title, subject });
 
-        if (result.n === 0) {
+        if (!assignment) {
             // If no assignment is found, return error
             return res.status(404).json({ message: "Assignment not found" });
         }
 
-        // If assignment is updated successfully, return success message
-        return res.status(200).json({ message: "Assignment updated successfully" });
+        // Update the assignment with the provided data
+        assignment.set(updatedData);
+        await assignment.save();
+
+        // If assignment is updated successfully, return updated assignment
+        return res.status(200).json(assignment);
     } catch (error) {
         console.error("Error updating assignment details:", error);
         return res.status(500).json({ message: "Internal server error" });
     }
 });
+
+// Backend endpoint to delete assignment
+app.delete('/delete_assignment', async (req, res) => {
+    const { title, subject } = req.query; // Extract title and subject from query parameters
+
+    try {
+        // Find and delete the assignment with the provided title and subject
+        const deletedAssignment = await Assignment.findOneAndDelete({ title, subject });
+
+        if (!deletedAssignment) {
+            // If no assignment is found, return error
+            return res.status(404).json({ message: "Assignment not found" });
+        }
+
+        // If assignment is deleted successfully, return deleted assignment
+        return res.status(200).json(deletedAssignment);
+    } catch (error) {
+        console.error("Error deleting assignment:", error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+});
+
+
+
 
 
 // Start the Express server
@@ -263,5 +283,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
-
-

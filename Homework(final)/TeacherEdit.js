@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                     console.log('Sending assignment data:', assignmentData); // Log assignmentData
                 
-                    fetch(`http://localhost:3000/update_assignment`, {
+                    fetch(`http://localhost:3000/update_assignment?title=${title}&subject=${subject}`, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json'
@@ -95,6 +95,39 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Title or subject missing in URL parameters');
     }
 });
+
+
+
+
+// JavaScript code DELETE
+document.getElementById('deleteAssignmentBtn').addEventListener('click', () => {
+    const confirmation = confirm('Are you sure you want to delete this assignment?');
+    if (confirmation) {
+        const title = document.getElementById('assignmentTitle').value;
+        const subject = document.getElementById('subjectDropdown').value;
+        
+        fetch(`http://localhost:3000/delete_assignment?title=${title}&subject=${subject}`, {
+            method: 'DELETE',
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to delete assignment');
+            }
+            return response.json();
+        })
+        .then(deletedAssignment => {
+            console.log('Assignment deleted successfully:', deletedAssignment);
+            alert('Assignment deleted successfully!');
+            // Optionally, redirect or update UI after successful deletion
+        })
+        .catch(error => {
+            console.error('Error deleting assignment:', error);
+            alert('Failed to delete assignment. Please try again later.');
+        });
+    }
+});
+
+
 
 
 
@@ -246,4 +279,3 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     manipulate(); // Call manipulate function once after DOMContentLoaded
-
