@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "express": "^4.19.1",
+    "mongodb": "^6.6.1",
     "nodemon": "^3.1.0"
   },
   "name": "homework",
@@ -11,5 +12,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "keywords": []
 }
