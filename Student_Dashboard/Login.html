@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homework Collaboration</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        display: flex;
+        height: 100vh;
+        border-right: 2px solid #ccc; /* Add a border to the right side of the container */
+      }
+
+      .left-column,
+      .right-column {
+        flex: 1;
+        padding: 30px;
+      }
+
+      .left-column img {
+        width: 500px;
+        height: 500px;
+        object-fit: cover;
+        margin-left: 60px;
+      }
+
+      .right-column {
+        background-color: #5955b3; /* Set the background color */
+        padding: 30px; /* Maintain padding */
+        display: flex; /* Maintain flex layout */
+        flex-direction: column; /* Maintain column layout */
+        justify-content: center; /* Center content vertically */
+      }
+
+      .main-heading {
+        font-size: 32px; /* Increase font size */
+        font-weight: bold;
+        color: #5955b3; /* Change text color to white */
+        text-align: center; /* Center align text */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add a text shadow for depth */
+        margin-top: 50px; /* Adjust top margin for spacing */
+        padding: 0 20px; /* Add padding for better readability */
+      }
+
+      .description {
+        font-size: 20px; /* Increase font size */
+        color: #666; /* Change text color to white */
+        text-align: center; /* Center align text */
+        margin-bottom: 50px; /* Increase bottom margin for spacing */
+        line-height: 1.6; /* Adjust line height for better readability */
+        padding: 0 20px; /* Add padding for better readability */
+      }
+
+      .divider {
+        width: 2px;
+        background-color: #ccc;
+      }
+
+      .password-field {
+        position: relative;
+      }
+
+      .toggle-password {
+        position: absolute;
+        top: 50%;
+        right: 5px;
+        transform: translateY(-50%);
+        cursor: pointer;
+        margin-right: 20px;
+      }
+
+      .toggle-password img {
+        width: 20px; /* Adjust the width of the eye icon */
+        height: auto; /* Allow the height to adjust proportionally */
+      }
+
+      .login-card {
+        margin-top: 50px;
+        margin-left: 40px;
+        background-color: #f0f0f0;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        height: 500px;
+        width: 600px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
+
+      .login-card:hover {
+        transform: scale(1.05); /* Scale up the card on hover */
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Add a stronger box shadow on hover */
+      }
+
+      .login-card h2 {
+        text-align: center; /* Align the text in the center */
+        margin-bottom: 50px; /* Add some spacing below the heading */
+      }
+
+      .login-card form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .login-card label {
+        display: block;
+        margin-bottom: 10px;
+        color: #555; /* Change label color for better contrast */
+      }
+
+      /* Input Field Container Styling */
+      .input-container {
+        width: 80%; /* Set a fixed width for the container */
+        margin: 0 auto 30px; /* Center the container horizontally and add bottom margin */
+      }
+
+      /* Input Field Styling */
+      .login-card input {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid transparent; /* Add a transparent border */
+        border-radius: 30px;
+        background-color: #f0f0f0;
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Add transitions for smooth border and box-shadow changes */
+      }
+
+      .login-card input:focus {
+        outline: none;
+        border-color: #5a85c6; /* Change border color on focus */
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2); /* Change box-shadow on focus */
+      }
+
+      .login-card input:hover {
+        background-color: #eaeaea; /* Change background color on hover */
+        box-shadow: inset 0 0 10px rgba(41, 7, 137, 0.4); /* Change box-shadow on hover */
+      }
+
+      .login-card button {
+        width: 27%;
+        padding: 15px;
+        margin: 10px auto 0;
+        background-color: #5955b3;
+        color: #ffffff;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease, transform 0.2s ease; /* Add transition for smooth background color change and scale effect */
+      }
+
+      .login-card button:hover {
+        background-color: #9fa2db;
+        transform: scale(1.05); /* Add scale effect on hover */
+      }
+
+      /* FOR PASSWORD HIDE UNHIDE*/
+      /* Add this to your existing CSS */
+
+      .password-field {
+        position: relative;
+      }
+
+      .toggle-password {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 20px;
+        background-image: url("eye-icon.png");
+        background-size: cover;
+        cursor: pointer;
+      }
+
+      .toggle-password.visible {
+        background-image: url("eye-slash-icon.png"); /* Replace 'eye-slash-icon.png' with your icon */
+      }
+
+      /* FOR THE FORM EMAIL AND PASSWORD EFFECT*/
+      .form-label {
+        font-weight: bold; /* Make the labels bold */
+        font-size: 16px; /* Adjust the font size */
+        padding-bottom: 5px; /* Add some padding at the bottom */
+      }
+
+      .form-input {
+        /* Add common styling for input fields if needed */
+        width: 100%;
+        padding: 10px;
+        border: 1.5px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        transition: border-color 0.3s ease;
+      }
+
+      .form-input:focus {
+        outline: none;
+        border-color: #16a86b;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left-column">
+        <!-- Put your image here -->
+        <h1 class="main-heading">Welcome to Homework Collaboration System</h1>
+        <img src="login.jpg" alt="" />
+      </div>
+      <div class="divider"></div>
+      <div class="right-column">
+        <!-- Put your login card here -->
+        <div class="login-card">
+          <h2>Login Panel</h2>
+          <!-- Your login form goes here -->
+          <form id="login-form">
+            <!-- Added ID to the form -->
+            <div class="input-container">
+              <label for="email" class="form-label">Email:</label>
+              <input type="text" id="email" name="email" class="form-input" />
+            </div>
+            <div class="input-container">
+              <div class="password-field">
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  class="form-input"
+                />
+                <span
+                  class="toggle-password"
+                  id="toggle-password"
+                  onclick="togglePasswordVisibility()"
+                >
+                  <!-- Added onclick event -->
+                  <img src="image/eye-icon.png" alt="" />
+                </span>
+              </div>
+            </div>
+            <button type="submit">Login</button>
+          </form>
+          <p id="login-message"></p>
+          <!-- Added placeholder for login message -->
+        </div>
+      </div>
+    </div>
+    <script src="login.js"></script>
+  </body>
+</html>
