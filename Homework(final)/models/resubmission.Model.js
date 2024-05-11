@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-// Define Submission schema
+// Define the Submission schema
 const submissionSchema = new mongoose.Schema({
   assignmentTitle: {
     type: String,
@@ -11,16 +11,24 @@ const submissionSchema = new mongoose.Schema({
     required: true,
   },
   file: {
-    type: String,
+    type: String, // Assuming you store file paths or URLs as strings
     required: true,
   },
   submittedAt: {
     type: Date,
     default: Date.now,
   },
+  isResubmission: {
+    type: Boolean,
+    default: false,
+  },
+  originalSubmission: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Submission",
+  },
 });
 
-// Create Submission model
+// Create the Submission model
 const Submission = mongoose.model("Submission", submissionSchema);
 
 module.exports = Submission;

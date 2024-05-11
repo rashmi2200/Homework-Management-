@@ -10,11 +10,10 @@
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 0;
-        background-color: rgb(249, 252, 251);
+        background-color: rgb(244, 246, 245);
       }
 
       /* Sidebar */
-
       .sidebar {
         height: 100%;
         width: 250px;
@@ -22,9 +21,10 @@
         top: 0;
         left: 0;
         padding-top: 20px;
-        background-color: #5955b3;
+        background-color: #aaa7e3;
         align-items: center;
       }
+      
       .sidebar h2 {
         color: #ffffff;
         text-align: center;
@@ -47,14 +47,12 @@
         font-size: 1.1rem;
         font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
         background-color: #f7f7f7;
-        color: #5955B3;
+        color: #5955b3;
       }
       .flex button:hover {
-  background-color: #f0f0f0; /* Change background color on hover */
-  color: #333; /* Change text color on hover */
-}
-
-      
+        background-color: #f0f0f0; /* Change background color on hover */
+        color: #333; /* Change text color on hover */
+      }
 
       .Dashboard {
         border-radius: 50%;
@@ -66,7 +64,7 @@
       .dd {
         font-size: 1rem;
         margin-left: 30px;
-        color:rgb(255, 255, 255)
+        color: rgb(255, 255, 255);
       }
 
       .Logout {
@@ -92,12 +90,11 @@
         color: #ffffff; /* Change color to white */
         font-family: Inter;
         font-size: 24px;
-        
       }
-      
+
       .card-content p {
-       color: #393636; /* Change color to white */
-       flex: 1; 
+        color: #393636; /* Change color to white */
+        flex: 1;
       }
 
       .card-container {
@@ -110,7 +107,7 @@
         background-color: #aaa7e3;
         position: relative;
         display: flex;
-        align-items: center; 
+        align-items: center;
       }
 
       .card-container:hover {
@@ -118,24 +115,22 @@
       }
 
       .card-content {
-      padding: 20px;
-      display: flex;
-      flex-direction: row; /* Lay out items in a row */
-      align-items: center; /* Align items vertically */
+        padding: 20px;
+        display: flex;
+        flex-direction: row; /* Lay out items in a row */
+        align-items: center; /* Align items vertically */
       }
 
-            
       .card-content .herald {
-       /* Styles specific to the image (herald) */
-       margin-right: 20px; /* Add margin to separate the image from the text */
-       }
+        /* Styles specific to the image  */
+        margin-right: 20px; /* Add margin to separate the image from the text */
+      }
 
       .card-content img {
-      margin-right: 20px; /* Add margin to separate the image from the text */
+        margin-right: 20px; /* Add margin to separate the image from the text */
       }
       .card-content > div {
-      margin-right: 20px; /* Adjust margin to move content to the left */
-  
+        margin-right: 20px; /* Adjust margin to move content to the left */
       }
 
       .card-icon {
@@ -148,12 +143,11 @@
         transition: transform 0.3s, filter 0.3s;
       }
       .card-icon:hover {
-       transform: translateX(-50%) scale(1.2); /* Increase the size on hover */
-       filter: brightness(1.2); /* Adjust brightness on hover */
-       }
+        transform: translateX(-50%) scale(1.2); /* Increase the size on hover */
+        filter: brightness(1.2); /* Adjust brightness on hover */
+      }
 
       .herald {
-        
         height: 120px;
         width: 120px;
         border-radius: 50%;
@@ -190,9 +184,8 @@
         max-width: 800px;
         margin: 0 auto;
         overflow: auto;
-        background-color: #5955b3;
+        background-color:  #aaa7e3;;
         margin-left: 230px;
-        
       }
 
       .button-container-calendar button {
@@ -292,64 +285,104 @@
               <button type="Home">Home</button>
             </li>
             <li>
+              <a href="studentNotice.html">
               <button>Noticeboard</button>
             </li>
+          </a>
             <li>
+              <a href="to-do.html">
               <button type="todo">To-Do</button>
             </li>
+          </a>
             <li>
-              <button class="Setting" onclick="window.location.href='StudentSetting.html'">Settings</button>
+              <a href="StudentSetting.html">
+              <button>Settings</button>
             </li>
+          </a>
             <li>
-              <button class="Logout" onclick="window.location.href='loginpage.html'">Logout</button>
-          </li>
-          
+              <button
+                class="Logout"
+                onclick="window.location.href='Login.html'">
+                Logout
+              </button>
+            </li>
           </ul>
         </div>
 
         <div class="content">
           <div class="card-container">
+           
             <div class="card">
               <div class="card-content">
                 <img src="image/english.png" alt="pic" class="herald" />
+                <a href="StudentEnglish.html">
                 <div>
                   <h3>English</h3>
-                  <p>A subject focused on language, literature, and communication.</p>
+                  <p>
+                    A subject focused on language, literature, and
+                    communication.
+                  </p>
                 </div>
+              </a>
               </div>
-              <img src="image/work.png" alt="Icon1" class="card-icon" onclick="redirectTo('StudentEnglish.html')" />
+              <a href="English-content.html">
+              <img
+                src="image/work.png"
+                alt="Icon1"
+                class="card-icon"
+                onclick="redirectTo('English-content.html')"
+              />
+              </a>
             </div>
           </div>
-        
           <div class="card-container">
             <div class="card">
               <div class="card-content">
                 <img src="image/science.png" alt="pic" class="herald" />
+                <a href="StudentScience.html">
                 <div>
                   <h3>Science</h3>
-                  <p>Study of the world, including physics, chemistry & biology.</p>
+                  <p>
+                    Study of the world, including physics, chemistry & biology.
+                  </p>
                 </div>
+              </a>
               </div>
-              <img src="image/work.png" alt="Icon2" class="card-icon" onclick="redirectTo('StudentScience.html')" />
+              <a href="science-content.html">
+                <img
+                  src="image/work.png"
+                  alt="Icon1"
+                  class="card-icon"
+                  onclick="redirectTo('science-content.html')"
+                />
+                </a>
             </div>
           </div>
-        
+
           <div class="card-container">
+           
             <div class="card">
               <div class="card-content">
                 <img src="image/social.png" alt="pic" class="herald" />
+                <a href="StudentSocial.html">
                 <div>
                   <h3>Social Studies</h3>
                   <p>Examines human society, culture, and relationships.</p>
                 </div>
+              </a>
               </div>
-              <img src="image/work.png" alt="Icon3" class="card-icon" onclick="redirectTo('StudentSocial.html')" />
+              <a href="social-content.html">
+                <img
+                  src="image/work.png"
+                  alt="Icon1"
+                  class="card-icon"
+                  onclick="redirectTo('social-content.html')"
+                />
+                </a>
             </div>
           </div>
         </div>
 
-
-        
         <div class="wrapper">
           <div class="container-calendar">
             <h3 id="monthAndYear"></h3>
@@ -386,6 +419,6 @@
         </div>
       </div>
     </div>
-    <script src="StudentDashboard.js"></script>
+    <script src="StudentDashboard.js"> </script>
   </body>
 </html>

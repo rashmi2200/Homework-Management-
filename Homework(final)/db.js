@@ -260,15 +260,15 @@ app.put("/update_assignment", async (req, res) => {
 app.post("/submit_assignment", async (req, res) => {
   try {
     // Extract submission data from request body
-    const { assignmentId, userId, submissionDetails } = req.body;
+    const { assignmentTitle, dueDate, file, resubmit } = req.body;
 
-    // Assuming you have a Submission model/schema defined
     // Create a new submission document
     const newSubmission = new Submission({
-      assignmentId: assignmentId,
-      userId: userId,
-      submissionDetails: submissionDetails,
+      assignmentTitle: assignmentTitle,
+      dueDate: dueDate,
+      file: file,
       submittedAt: new Date(),
+      isResubmission: resubmit || false, // Set isResubmission to true if resubmit field is present and true, otherwise set to false
     });
 
     // Save the submission to the database
@@ -288,7 +288,6 @@ app.post("/resubmit_assignment", async (req, res) => {
     // Extract resubmission data from request body
     const { assignmentId, userId, resubmissionDetails } = req.body;
 
-    // Assuming you have a Resubmission model/schema defined
     // Create a new resubmission document
     const newResubmission = new Resubmission({
       assignmentId: assignmentId,
