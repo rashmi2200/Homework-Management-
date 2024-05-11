@@ -256,6 +256,58 @@ app.put("/update_assignment", async (req, res) => {
   }
 });
 
+// Route for submitting an assignment
+app.post("/submit_assignment", async (req, res) => {
+  try {
+    // Extract submission data from request body
+    const { assignmentId, userId, submissionDetails } = req.body;
+
+    // Assuming you have a Submission model/schema defined
+    // Create a new submission document
+    const newSubmission = new Submission({
+      assignmentId: assignmentId,
+      userId: userId,
+      submissionDetails: submissionDetails,
+      submittedAt: new Date(),
+    });
+
+    // Save the submission to the database
+    await newSubmission.save();
+
+    // Send success response
+    res.status(200).json({ message: "Assignment submitted successfully" });
+  } catch (error) {
+    console.error("Error submitting assignment:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+// Route for resubmitting an assignment
+app.post("/resubmit_assignment", async (req, res) => {
+  try {
+    // Extract resubmission data from request body
+    const { assignmentId, userId, resubmissionDetails } = req.body;
+
+    // Assuming you have a Resubmission model/schema defined
+    // Create a new resubmission document
+    const newResubmission = new Resubmission({
+      assignmentId: assignmentId,
+      userId: userId,
+      resubmissionDetails: resubmissionDetails,
+      resubmittedAt: new Date(),
+    });
+
+    // Save the resubmission to the database
+    await newResubmission.save();
+
+    // Send success response
+    res.status(200).json({ message: "Assignment resubmitted successfully" });
+  } catch (error) {
+    console.error("Error resubmitting assignment:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
 // Start the Express server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
