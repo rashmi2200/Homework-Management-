@@ -287,75 +287,116 @@
 
       /* Assignment Portal */
       .assign {
-        max-width: 800px;
-        margin: 100px auto;
-        padding: 40px;
-        background-color: #aaa7e3;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
+  max-width: 1000px;
+  margin: 100px auto;
+  padding: 80px;
+  background-color: #aaa7e3;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* Add margin to the left side to move it to the right */
+  margin-left: 350px; /* Adjust this value as needed */
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
 
-      h1 {
-        text-align: center;
-        color: #171717;
-        margin-bottom: 20px;
-      }
 
-      /* Form styles */
-      form {
-        display: flex;
-        flex-direction: column;
-      }
 
-      label {
-        color: #070707;
-        margin-bottom: 5px;
-      }
+h1 {
+    text-align: center;
+    color: #171717;
+    margin-bottom: 20px;
+}
 
-      input[type="text"],
-      textarea,
-      input[type="file"] {
-        padding: 10px;
-        margin-bottom: 15px;
-        border: none;
-        border-radius: 4px;
-      }
+.assignment {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.1); /* More realistic box shadow */
+    padding: 25px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease-in-out;
+}
 
-      input[type="text"],
-      textarea {
-        background-color: #f4f4f4;
-      }
+.assignment:last-child {
+    border-bottom: none;
+}
 
-      input[type="file"] {
-        background-color: #1f1c20;
-        cursor: pointer;
-        color: white;
-        margin-right: 30rem; /* Adjusted margin to add space */
-      }
+.assignment:hover {
+    transform: translateY(-4px); /* Add a slight lift effect on hover */
+}
 
-      input[type="submit"] {
-        background-color: #1f1c20;
-        color: #f4f4f4;
-        padding: 12px 0;
-        margin-right: 30rem; /* Adjusted margin to add space */
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.3s ease-in-out;
-      }
+.assignment p {
+    margin: 0;
+    padding: 5px 0;
+}
 
-      input[type="submit"]:hover {
-        background-color: rgb(170, 196, 185);
-      }
 
-      .resubmit {
-        margin-left: 1rem;
-        margin-bottom: 10px;
-      }
 
-      .resubmit label {
-        margin-left: 5px;
-      }
+/* General styling */
+label {
+    display: block;
+    color: #070707;
+    margin-bottom: 10px; /* Increased margin for better separation */
+}
+
+input[type="text"],
+textarea,
+input[type="file"],
+input[type="submit"] {
+    padding: 12px; /* Slightly increased padding for better visual balance */
+    margin-bottom: 20px; /* Increased margin for better separation */
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Text input and textarea styling */
+input[type="text"],
+textarea {
+    background-color: #f4f4f4;
+}
+
+/* File input styling */
+input[type="file"] {
+    background-color: #1f1c20;
+    color: white;
+    cursor: pointer;
+}
+
+
+
+/* Resubmit option styling */
+.resubmit {
+    display: flex; /* Use flexbox */
+    align-items: center; /* Align items vertically */
+    margin-bottom: 20px; /* Increased margin for better separation */
+}
+
+.resubmit input[type="checkbox"] {
+    margin-right: 8px; /* Adjust spacing between checkbox and text */
+}
+
+.resubmit label {
+    margin: 0; /* Remove default margin */
+}
+#submitAssignmentBtn {
+    padding: 12px 24px; /* Adjust padding for better button size */
+    background-color: #1f1c20;
+    color: #f4f4f4;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#submitAssignmentBtn:hover {
+    background-color: #5955B3;
+}
+
+
     </style>
   </head>
   <body>
@@ -399,40 +440,63 @@
     </div>
 
     <div class="assign">
-      <h1>English Assignment Portal</h1>
-      <form
-        enctype="multipart/form-data"
-        action="/submit_assignment"
-        method="post"
-      >
-        <label for="assignmentTitle">Assignment Title:</label>
-        <input
-          type="text"
-          id="assignmentTitle"
-          name="assignmentTitle"
-          required
-        />
-
-        <label for="dueDate">Due Date:</label>
-        <input
-          type="text"
-          id="dueDate"
-          name="dueDate"
-          placeholder="YYYY-MM-DD"
-          required
-        />
-
-        <label for="file">Upload File:</label>
-        <input type="file" id="file" name="file" required />
-
-        <!-- Resubmit option -->
-        <div class="resubmit">
-          <input type="checkbox" id="resubmit" name="resubmit" />
-          <label for="resubmit">Resubmit</label>
-        </div>
-
-        <input type="submit" value="Submit Assignment" />
+      <h1>Assignment Portal</h1>
+      <div id="assignmentDetails" class="assignment-details">
+          <!-- Assignment details will be dynamically added here -->
+      </div>
+      <form enctype="multipart/form-data" action="/submit_assignment" method="post">
+          <label for="file">Upload File:</label>
+          <input type="file" id="file" name="file" required />
+  
+          <!-- Resubmit option -->
+          <div class="resubmit">
+              <input type="checkbox" id="resubmit" name="resubmit" />
+              <label for="resubmit">Resubmit</label>
+          </div>
+  
+          <button id="submitAssignmentBtn" class="submit-assignment-button">Submit Assignment</button>
       </form>
-    </div>
-  </body>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const assignmentDetailsDiv = document.getElementById('assignmentDetails');
+        const urlParams = new URLSearchParams(window.location.search);
+        const assignmentTitle = urlParams.get('title');
+        const assignmentDetail = urlParams.get('detail');
+        const assignmentLink = urlParams.get('link');
+        const assignmentDueDate = urlParams.get('dueDate');
+        const assignmentDueTime = urlParams.get('dueTime');
+        const assignmentSubject = urlParams.get('subject');
+
+        if (assignmentTitle && assignmentDetail && assignmentSubject) {
+            let assignmentDetailsHTML = `
+                <div class="assignment">
+                    <p><strong>Subject:</strong> ${assignmentSubject}</p>
+                    <p><strong>Title:</strong> ${assignmentTitle}</p>
+                    <p><strong>Details:</strong> ${assignmentDetail}</p>
+                    <p><strong>Due Date:</strong> ${assignmentDueDate}</p>
+                    <p><strong>Due Time:</strong> ${assignmentDueTime}</p>
+            `;
+
+            if (assignmentLink) {
+                assignmentDetailsHTML += `
+                    <p><strong>Link:</strong> <a href="${assignmentLink}" target="_blank">${assignmentLink}</a></p>
+                `;
+            } else {
+                assignmentDetailsHTML += `
+                    <p><strong>Files:</strong> No files attached</p>
+                `;
+            }
+
+            assignmentDetailsHTML += `</div>`;
+            
+            assignmentDetailsDiv.innerHTML = assignmentDetailsHTML;
+        } else {
+            console.error('Incomplete assignment data found in URL parameters');
+        }
+    });
+</script>
+
+</body>
 </html>
