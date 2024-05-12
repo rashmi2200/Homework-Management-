@@ -7,6 +7,9 @@ const User = require('./models/userModel');
 const cors = require("cors");
 const Assignment = require('./models/assignmentModel'); // Import Assignment model
 const Submission = require('./models/submissionModel'); 
+const Student = require('./models/studentModel');
+const Teacher = require('./models/teacherModel');
+const Subject = require('./models/subjectModel');
 
 // MongoDB connection string
 app.use(cors({
@@ -291,6 +294,35 @@ app.get('/student/assignments', async (req, res) => {
 
 
 
+// Handle assignment submission
+app.post('/submit_assignment', async (req, res) => {
+    try {
+        console.log('Request Body:', req.body); // Log the request body
+        
+        // Retrieve assignment data from request body
+        const { subject, title, detail, file, deadline } = req.body;
+
+        console.log('Assignment Data:', { subject, title, detail, file, deadline }); // Log the assignment data
+        
+        // Create new submission document
+        const result = await Submission.create({
+            subject,
+            title,
+            detail,
+            file,
+            deadline,
+            submittedAt: new Date() // Record current date and time
+        });
+
+        console.log('Submission Result:', result); // Log the result of the submission
+        
+        // Send success response
+        res.status(200).json({ message: 'Assignment submitted successfully' });
+    } catch (error) {
+        console.error('Error submitting assignment:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
 
 // //SUBMITTING FOR STUDENT
 
@@ -346,6 +378,123 @@ app.get('/student/assignments', async (req, res) => {
 //   });
   
  
+
+
+
+// Route for handling student creation
+app.post('/students/add', async (req, res) => {
+    try {
+        // Retrieve student data from request body
+        const { name, email, phone } = req.body;
+
+        // Create new student document
+        const result = await Student.create({
+            name,
+            email,
+            phone
+        });
+
+        console.log("result::", result);
+        if (result) {
+            // Send success response
+            res.status(200).json({ message: 'Student added successfully' });
+        }
+    } catch (error) {
+        console.error('Error adding student:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+
+// Route for fetching student data
+app.get('/students', async (req, res) => {
+    try {
+        // Fetch all students from MongoDB
+        const students = await Student.find({});
+        res.status(200).json(students);
+    } catch (error) {
+        console.error('Error fetching students:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+
+
+// Route for handling teacher creation
+app.post('/teachers/add', async (req, res) => {
+    try {
+        // Retrieve teacher data from request body
+        const { name, email, phone } = req.body;
+
+        // Create new teacher document
+        const result = await Teacher.create({
+            name,
+            email,
+            phone
+        });
+
+        console.log("result::", result);
+        if (result) {
+            // Send success response
+            res.status(200).json({ message: 'Teacher added successfully' });
+        }
+    } catch (error) {
+        console.error('Error adding teacher:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+
+// Route for fetching teacher data
+app.get('/teachers', async (req, res) => {
+    try {
+        // Fetch all teachers from MongoDB
+        const teachers = await Teacher.find({});
+        res.status(200).json(teachers);
+    } catch (error) {
+        console.error('Error fetching teachers:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+
+
+
+// Route for handling subject creation
+app.post('/subjects/add', async (req, res) => {
+    try {
+        // Retrieve subject data from request body
+        const { name, code } = req.body;
+
+        // Create new subject document
+        const result = await Subject.create({
+            name,
+            code
+        });
+
+        console.log("result::", result);
+        if (result) {
+            // Send success response
+            res.status(200).json({ message: 'Subject added successfully' });
+        }
+    } catch (error) {
+        console.error('Error adding subject:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+
+// Route for fetching subjects data
+app.get('/subjects', async (req, res) => {
+    try {
+        // Fetch all subjects from MongoDB
+        const subjects = await Subject.find({});
+        res.status(200).json(subjects);
+    } catch (error) {
+        console.error('Error fetching subjects:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
 
 // Start the Express server
 const PORT = process.env.PORT || 3000;

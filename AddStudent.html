@@ -45,12 +45,54 @@
             <input type="tel" id="student-phone" name="student-phone" required>
           </div>
           <div class="submit">
-            <button type="submit">Add Student</button>
+            <button id="addStudentBtn">Add Student</button>
           </div>
         </form>
       </div>
     </main>
   </section>
-  <script src="AdminDashboard.js"></script>
+  <script>
+  document.getElementById('addStudentBtn').addEventListener('click', async function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Get form data
+    const name = document.getElementById('student-name').value;
+    const email = document.getElementById('student-email').value;
+    const phone = document.getElementById('student-phone').value;
+
+    // Prepare student data to send in the request body
+    const studentData = {
+        name,
+        email,
+        phone
+    };
+
+    // Send POST request to add student
+    try {
+        const response = await fetch('http://localhost:3000/students/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(studentData)
+        });
+
+        // Check if request was successful
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data.message); // Log success message
+            // Show pop-up saying "Student Added Successfully"
+            alert('Student Added Successfully');
+        } else {
+            console.error('Failed to add student');
+            // Optionally, you can display an error message to the user
+        }
+    } catch (error) {
+        console.error('Error adding student:', error);
+        // Optionally, you can display an error message to the user
+    }
+});
+
+  </script>
 </body>
 </html>

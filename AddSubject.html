@@ -35,14 +35,58 @@
           <div class="input-group">
             <label for="subject-name">Subject Name:</label>
             <input type="text" id="subject-name" name="subject-name" required>
+            <label for="subject-code">Subject Code:</label>
+            <input type="text" id="subject-code" name="subject-code" required>
           </div>
           <div class="submit">
-            <button type="submit">Submit</button>
+            <button id="addSubjectBtn">Add Subject</button>
+          </div>
           </div>
         </form>
       </div>
     </main>
   </section>
-  <script src="AdminDashboard.js"></script>
+  <script>
+    document.getElementById('addSubjectBtn').addEventListener('click', async function(event) {
+      event.preventDefault(); // Prevent default form submission
+  
+      // Get form data
+      const name = document.getElementById('subject-name').value;
+      const code = document.getElementById('subject-code').value;
+      
+  
+      // Prepare subject data to send in the request body
+      const subjectData = {
+          name,
+          code
+      };
+  
+      // Send POST request to add subject
+      try {
+          const response = await fetch('http://localhost:3000/subjects/add', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(subjectData)
+          });
+  
+          // Check if request was successful
+          if (response.ok) {
+              const data = await response.json();
+              console.log(data.message); // Log success message
+              // Show pop-up saying "subject Added Successfully"
+              alert('subject Added Successfully');
+          } else {
+              console.error('Failed to add subject');
+              // Optionally, you can display an error message to the user
+          }
+      } catch (error) {
+          console.error('Error adding subject:', error);
+          // Optionally, you can display an error message to the user
+      }
+  });
+  
+    </script>
 </body>
 </html>

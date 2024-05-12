@@ -395,6 +395,28 @@ input[type="file"] {
 #submitAssignmentBtn:hover {
     background-color: #5955B3;
 }
+.custom-file-upload {
+  cursor: pointer;
+  background-color: #5955B3;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.custom-file-upload:hover {
+  background-color: #0056b3;
+}
+
+.file-input {
+  display: none;
+}
+
+#fileInputName {
+  margin-top: 5px;
+  font-size: 14px;
+}
+
 
 
     </style>
@@ -444,59 +466,135 @@ input[type="file"] {
       <div id="assignmentDetails" class="assignment-details">
           <!-- Assignment details will be dynamically added here -->
       </div>
-      <form enctype="multipart/form-data" action="/submit_assignment" method="post">
-          <label for="file">Upload File:</label>
-          <input type="file" id="file" name="file" required />
-  
-          <!-- Resubmit option -->
-          <div class="resubmit">
-              <input type="checkbox" id="resubmit" name="resubmit" />
-              <label for="resubmit">Resubmit</label>
-          </div>
-  
-          <button id="submitAssignmentBtn" class="submit-assignment-button">Submit Assignment</button>
-      </form>
+      <input type="text" id="assignmentFileLink" class="assignment-input" style="width: 600px;" placeholder="Attach a file or enter URL...">
+      <div class="file-upload">
+          <label for="fileInput" class="custom-file-upload">Upload File</label>
+          <input type="file" id="fileInput" class="file-input" accept=".pdf, .doc, .docx" onchange="displayFileName()">
+      </div>
+      <!-- Resubmit option -->
+      <div class="resubmit">
+          <input type="checkbox" id="resubmit" name="resubmit" />
+          <label for="resubmit">Resubmit</label>
+      </div>
+      <button type="submit" id="submitAssignmentBtn" class="submit-assignment-button">Submit Assignment</button>
   </div>
-
+  
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const assignmentDetailsDiv = document.getElementById('assignmentDetails');
+      document.addEventListener('DOMContentLoaded', () => {
+          const assignmentDetailsDiv = document.getElementById('assignmentDetails');
+          const urlParams = new URLSearchParams(window.location.search);
+          const assignmentTitle = urlParams.get('title');
+          const assignmentDetail = urlParams.get('detail');
+          const assignmentLink = urlParams.get('link');
+          const assignmentDueDate = urlParams.get('dueDate');
+          const assignmentDueTime = urlParams.get('dueTime');
+          const assignmentSubject = urlParams.get('subject');
+  
+          if (assignmentTitle && assignmentDetail && assignmentSubject) {
+              let assignmentDetailsHTML = `
+                  <div class="assignment">
+                      <p><strong>Subject:</strong> ${assignmentSubject}</p>
+                      <p><strong>Title:</strong> ${assignmentTitle}</p>
+                      <p><strong>Details:</strong> ${assignmentDetail}</p>
+                      <p><strong>Due Date:</strong> ${assignmentDueDate}</p>
+                      <p><strong>Due Time:</strong> ${assignmentDueTime}</p>
+              `;
+  
+              if (assignmentLink) {
+                  assignmentDetailsHTML += `
+                      <p><strong>Link:</strong> <a href="${assignmentLink}" target="_blank">${assignmentLink}</a></p>
+                  `;
+              } else {
+                  assignmentDetailsHTML += `
+                      <p><strong>Files:</strong> No files attached</p>
+                  `;
+              }
+  
+              assignmentDetailsHTML += `</div>`;
+  
+              assignmentDetailsDiv.innerHTML = assignmentDetailsHTML;
+          } else {
+              console.error('Incomplete assignment data found in URL parameters');
+          }
+      });
+  // Function to display selected file name
+function displayFileName() {
+    const fileInput = document.getElementById('fileInput');
+    const assignmentFileLink = document.getElementById('assignmentFileLink');
+    if (fileInput.files.length > 0) {
+        assignmentFileLink.value = fileInput.files[0].name;
+    } else {
+        assignmentFileLink.value = '';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Add onchange event listener to file input field
+    document.getElementById('fileInput').addEventListener('change', displayFileName);
+
+    // Click event listener for custom file upload button
+    document.querySelector('.custom-file-upload').addEventListener('click', function() {
+        document.getElementById('fileInput').click();
+    });
+
+    // Submit assignment button click event listener
+    document.getElementById('submitAssignmentBtn').addEventListener('click', async function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Get the file input element
+        const fileInput = document.getElementById('fileInput');
+
+        // Check if a file is selected
+        if (!fileInput.files || fileInput.files.length === 0) {
+            alert('Please select a file to upload.');
+            return;
+        }
+
+        // Get assignment data from the URL parameters
         const urlParams = new URLSearchParams(window.location.search);
         const assignmentTitle = urlParams.get('title');
         const assignmentDetail = urlParams.get('detail');
-        const assignmentLink = urlParams.get('link');
+        const assignmentSubject = urlParams.get('subject');
         const assignmentDueDate = urlParams.get('dueDate');
         const assignmentDueTime = urlParams.get('dueTime');
-        const assignmentSubject = urlParams.get('subject');
 
-        if (assignmentTitle && assignmentDetail && assignmentSubject) {
-            let assignmentDetailsHTML = `
-                <div class="assignment">
-                    <p><strong>Subject:</strong> ${assignmentSubject}</p>
-                    <p><strong>Title:</strong> ${assignmentTitle}</p>
-                    <p><strong>Details:</strong> ${assignmentDetail}</p>
-                    <p><strong>Due Date:</strong> ${assignmentDueDate}</p>
-                    <p><strong>Due Time:</strong> ${assignmentDueTime}</p>
-            `;
+        // Combine date and time into a single deadline string
+        const deadline = new Date(`${assignmentDueDate}T${assignmentDueTime}`);
 
-            if (assignmentLink) {
-                assignmentDetailsHTML += `
-                    <p><strong>Link:</strong> <a href="${assignmentLink}" target="_blank">${assignmentLink}</a></p>
-                `;
+        // Prepare assignment data to send in the request body
+        const formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+        formData.append('title', assignmentTitle);
+        formData.append('detail', assignmentDetail);
+        formData.append('subject', assignmentSubject);
+        formData.append('deadline', deadline);
+
+        // Send POST request to submit assignment
+        try {
+            const response = await fetch('/submit_assignment', {
+                method: 'POST',
+                body: formData
+            });
+
+            // Check if request was successful
+            if (response.ok) {
+                console.log('Assignment submitted successfully');
+                alert('Assignment Submitted Successfully');
             } else {
-                assignmentDetailsHTML += `
-                    <p><strong>Files:</strong> No files attached</p>
-                `;
+                console.error('Failed to submit assignment');
+                alert('Failed to submit assignment');
             }
-
-            assignmentDetailsHTML += `</div>`;
-            
-            assignmentDetailsDiv.innerHTML = assignmentDetailsHTML;
-        } else {
-            console.error('Incomplete assignment data found in URL parameters');
+        } catch (error) {
+            console.error('Error submitting assignment:', error);
+            alert('Error submitting assignment');
         }
     });
-</script>
+});
+
+  </script>
+  
+
+
 
 </body>
 </html>

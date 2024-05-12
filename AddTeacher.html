@@ -45,12 +45,71 @@
             <input type="tel" id="teacher-phone" name="teacher-phone" required>
           </div>
           <div class="submit">
-            <button type="submit">Add Teacher</button>
+            <button id="addTeacherBtn">Add Teacher</button>
           </div>
         </form>
       </div>
+    
+      <div class="box">
+        <h2>Teacher List</h2>
+        <table id="teacher-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+            </tr>
+          </thead>
+          <tbody id="teacher-table-body"></tbody>
+        </table>
+      </div>
     </main>
+    
   </section>
-  <script src="AdminDashboard.js"></script>
+  <script>
+    document.getElementById('addTeacherBtn').addEventListener('click', async function(event) {
+      event.preventDefault(); // Prevent default form submission
+  
+      // Get form data
+      const name = document.getElementById('teacher-name').value;
+      const email = document.getElementById('teacher-email').value;
+      const phone = document.getElementById('teacher-phone').value;
+  
+      // Prepare teacher data to send in the request body
+      const teacherData = {
+          name,
+          email,
+          phone
+      };
+  
+      // Send POST request to add teacher
+      try {
+          const response = await fetch('http://localhost:3000/teachers/add', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(teacherData)
+          });
+  
+          // Check if request was successful
+          if (response.ok) {
+              const data = await response.json();
+              console.log(data.message); // Log success message
+              // Show pop-up saying "Teacher Added Successfully"
+              alert('Teacher Added Successfully');
+          } else {
+              console.error('Failed to add Teacher');
+              // Optionally, you can display an error message to the user
+          }
+      } catch (error) {
+          console.error('Error adding Teacher:', error);
+          // Optionally, you can display an error message to the user
+      }
+  });
+  
+    </script>
+  
 </body>
 </html>

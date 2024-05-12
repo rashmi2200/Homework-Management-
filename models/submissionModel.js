@@ -1,26 +1,37 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-// Define Submission schema
 const submissionSchema = new mongoose.Schema({
-  assignmentTitle: {
-    type: String,
-    required: true,
-  },
-  dueDate: {
-    type: Date,
-    required: true,
-  },
-  file: {
-    type: String,
-    required: true,
-  },
-  submittedAt: {
-    type: Date,
-    default: Date.now,
-  },
+    subject: {
+        type: String,
+        required: true
+    },
+    title: {
+        type: String,
+        required: true
+    },
+    detail: {
+        type: String,
+        required: true
+    },
+    file: {
+        type: String,
+        required: true
+    },
+    deadline: {
+        type: Date,
+        required: true
+    },
+    submittedAt: {
+        type: Date,
+        default: Date.now // Automatically set to current date/time when submitted
+    },
+    status: {
+        type: String,
+        enum: ['pending', 'submitted', 'missed'],
+        default: 'pending'
+    }
 });
 
-// Create Submission model
-const Submission = mongoose.model("Submission", submissionSchema);
+const Submission = mongoose.model('Submission', submissionSchema);
 
 module.exports = Submission;
