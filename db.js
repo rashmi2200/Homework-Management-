@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 const User = require('./models/userModel');
 const cors = require("cors");
 const Assignment = require('./models/assignmentModel'); // Import Assignment model
+const Submission = require('./models/submissionModel'); 
 
 // MongoDB connection string
 app.use(cors({
@@ -276,62 +277,73 @@ app.delete('/delete_assignment', async (req, res) => {
 });
 
 
-
-
-
-
-//SUBMITTING FOR STUDENT
-
-// Route for submitting an assignment
-app.post("/submit_assignment", async (req, res) => {
+// Route for fetching assignments data for students
+app.get('/student/assignments', async (req, res) => {
     try {
-      // Extract submission data from request body
-      const { assignmentTitle, dueDate, file, resubmit } = req.body;
-  
-      // Create a new submission document
-      const newSubmission = new Submission({
-        assignmentTitle: assignmentTitle,
-        dueDate: dueDate,
-        file: file,
-        submittedAt: new Date(),
-        isResubmission: resubmit || false, // Set isResubmission to true if resubmit field is present and true, otherwise set to false
-      });
-  
-      // Save the submission to the database
-      await newSubmission.save();
-  
-      // Send success response
-      res.status(200).json({ message: "Assignment submitted successfully" });
+        // Fetch all assignments from MongoDB
+        const assignments = await Assignment.find({});
+        res.status(200).json(assignments);
     } catch (error) {
-      console.error("Error submitting assignment:", error);
-      res.status(500).json({ message: "Internal server error" });
+        console.error('Error fetching assignments:', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
-  });
+});
+
+
+
+
+// //SUBMITTING FOR STUDENT
+
+// // Route for submitting an assignment
+// app.post("/submit_assignment", async (req, res) => {
+//     try {
+//       // Extract submission data from request body
+//       const { assignmentTitle, dueDate, file, resubmit } = req.body;
   
-  // Route for resubmitting an assignment
-  app.post("/resubmit_assignment", async (req, res) => {
-    try {
-      // Extract resubmission data from request body
-      const { assignmentId, userId, resubmissionDetails } = req.body;
+//       // Create a new submission document
+//       const newSubmission = new Submission({
+//         assignmentTitle: assignmentTitle,
+//         dueDate: dueDate,
+//         file: file,
+//         submittedAt: new Date(),
+//         isResubmission: resubmit || false, // Set isResubmission to true if resubmit field is present and true, otherwise set to false
+//       });
   
-      // Create a new resubmission document
-      const newResubmission = new Resubmission({
-        assignmentId: assignmentId,
-        userId: userId,
-        resubmissionDetails: resubmissionDetails,
-        resubmittedAt: new Date(),
-      });
+//       // Save the submission to the database
+//       await newSubmission.save();
   
-      // Save the resubmission to the database
-      await newResubmission.save();
+//       // Send success response
+//       res.status(200).json({ message: "Assignment submitted successfully" });
+//     } catch (error) {
+//       console.error("Error submitting assignment:", error);
+//       res.status(500).json({ message: "Internal server error" });
+//     }
+//   });
   
-      // Send success response
-      res.status(200).json({ message: "Assignment resubmitted successfully" });
-    } catch (error) {
-      console.error("Error resubmitting assignment:", error);
-      res.status(500).json({ message: "Internal server error" });
-    }
-  });
+//   // Route for resubmitting an assignment
+//   app.post("/resubmit_assignment", async (req, res) => {
+//     try {
+//       // Extract resubmission data from request body
+//       const { assignmentId, userId, resubmissionDetails } = req.body;
+  
+//       // Create a new resubmission document
+//       const newResubmission = new Resubmission({
+//         assignmentId: assignmentId,
+//         userId: userId,
+//         resubmissionDetails: resubmissionDetails,
+//         resubmittedAt: new Date(),
+//       });
+  
+//       // Save the resubmission to the database
+//       await newResubmission.save();
+  
+//       // Send success response
+//       res.status(200).json({ message: "Assignment resubmitted successfully" });
+//     } catch (error) {
+//       console.error("Error resubmitting assignment:", error);
+//       res.status(500).json({ message: "Internal server error" });
+//     }
+//   });
   
  
 

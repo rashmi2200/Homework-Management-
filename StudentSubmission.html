@@ -72,12 +72,29 @@
         margin-top: 70px;
       }
 
-      /* Adjustments */
       .notice {
-        display: flex;
-        justify-content: center; /* Center horizontally */
-        margin-top: 50px;
-      }
+    max-width: 1200px; /* Adjust the value as needed */
+    margin: 20px auto; /* Centers the table horizontally and adds margin top/bottom */
+    padding: 20px; /* Add some padding to the container */
+    box-sizing: border-box; /* Include padding in the width calculation */
+    margin-left: 250px; /* Adjust the value to shift the table to the right */
+}
+
+      #assignments-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#assignments-table th, #assignments-table td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+#assignments-table th {
+    background-color: #f2f2f2;
+}
+
     </style>
   </head>
   <body>
@@ -120,12 +137,33 @@
           </li>
           <li>
             <button class="Logout" onclick="window.location.href='loginpage.html'">
-              Logout
-            </button>
+                Logout
+              </button>
           </li>
         </ul>
       </div>
-      <h1>Noticeboard</h1>
+      <h1>Assignments</h1>
+      <table id="assignments-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Details</th>
+                <th>File Link</th>
+                <th>Due Date</th>
+                <th>Due Time</th>
+                <th>Status</th>
+                <th>Subject</th>
+                <th>Upload</th>
+            </tr>
+        </thead>
+        <tbody id="assignments-table-body">
+            <!-- Assignments will be populated here dynamically -->
+        </tbody>
+    </table>
     </div>
+    
+
+    <script src="StudentSubmission.js"> </script>
   </body>
 </html>
