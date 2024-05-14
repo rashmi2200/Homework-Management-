@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const submissionSchema = new mongoose.Schema({
-    subject: {
-        type: String,
-        required: true
-    },
+    // subject: {
+    //     type: String,
+    //     required: false
+    // },
     title: {
         type: String,
         required: true
@@ -17,18 +17,25 @@ const submissionSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    subject: String,
+    dueDate: String, 
+    dueTime: String, 
+    link: String, 
+    
     deadline: {
         type: Date,
-        required: true
+        required: false
     },
     submittedAt: {
         type: Date,
-        default: Date.now // Automatically set to current date/time when submitted
+        default: Date.now,
+        required: false // Automatically set to current date/time when submitted
     },
     status: {
         type: String,
         enum: ['pending', 'submitted', 'missed'],
-        default: 'pending'
+        default: 'pending',
+        required: false, 
     }
 });
 

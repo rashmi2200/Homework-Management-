@@ -463,136 +463,170 @@ input[type="file"] {
 
     <div class="assign">
       <h1>Assignment Portal</h1>
-      <div id="assignmentDetails" class="assignment-details">
+      <div id="assignmentDetails" clas
+      s="assignment-details">
           <!-- Assignment details will be dynamically added here -->
       </div>
       <input type="text" id="assignmentFileLink" class="assignment-input" style="width: 600px;" placeholder="Attach a file or enter URL...">
       <div class="file-upload">
           <label for="fileInput" class="custom-file-upload">Upload File</label>
-          <input type="file" id="fileInput" class="file-input" accept=".pdf, .doc, .docx" onchange="displayFileName()">
+          <input type="file" id="fileInput" class="file-input" accept=".pdf, .doc, .docx">
       </div>
-      <!-- Resubmit option -->
-      <div class="resubmit">
-          <input type="checkbox" id="resubmit" name="resubmit" />
-          <label for="resubmit">Resubmit</label>
-      </div>
-      <button type="submit" id="submitAssignmentBtn" class="submit-assignment-button">Submit Assignment</button>
+      <button type="button" id="submitAssignmentBtn" class="submit-assignment-button">Submit Assignment</button>
   </div>
   
   <script>
-      document.addEventListener('DOMContentLoaded', () => {
-          const assignmentDetailsDiv = document.getElementById('assignmentDetails');
-          const urlParams = new URLSearchParams(window.location.search);
-          const assignmentTitle = urlParams.get('title');
-          const assignmentDetail = urlParams.get('detail');
-          const assignmentLink = urlParams.get('link');
-          const assignmentDueDate = urlParams.get('dueDate');
-          const assignmentDueTime = urlParams.get('dueTime');
-          const assignmentSubject = urlParams.get('subject');
-  
-          if (assignmentTitle && assignmentDetail && assignmentSubject) {
-              let assignmentDetailsHTML = `
-                  <div class="assignment">
-                      <p><strong>Subject:</strong> ${assignmentSubject}</p>
-                      <p><strong>Title:</strong> ${assignmentTitle}</p>
-                      <p><strong>Details:</strong> ${assignmentDetail}</p>
-                      <p><strong>Due Date:</strong> ${assignmentDueDate}</p>
-                      <p><strong>Due Time:</strong> ${assignmentDueTime}</p>
-              `;
-  
-              if (assignmentLink) {
-                  assignmentDetailsHTML += `
-                      <p><strong>Link:</strong> <a href="${assignmentLink}" target="_blank">${assignmentLink}</a></p>
-                  `;
-              } else {
-                  assignmentDetailsHTML += `
-                      <p><strong>Files:</strong> No files attached</p>
-                  `;
-              }
-  
-              assignmentDetailsHTML += `</div>`;
-  
-              assignmentDetailsDiv.innerHTML = assignmentDetailsHTML;
-          } else {
-              console.error('Incomplete assignment data found in URL parameters');
-          }
-      });
-  // Function to display selected file name
-function displayFileName() {
-    const fileInput = document.getElementById('fileInput');
-    const assignmentFileLink = document.getElementById('assignmentFileLink');
-    if (fileInput.files.length > 0) {
-        assignmentFileLink.value = fileInput.files[0].name;
-    } else {
-        assignmentFileLink.value = '';
+    // Function to display the selected file name
+    function displayFileName() {
+        const fileInput = document.getElementById('fileInput');
+        const assignmentFileLink = document.getElementById('assignmentFileLink');
+        assignmentFileLink.value = fileInput.files.length > 0 ? fileInput.files[0].name : '';
     }
-}
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        populateAssignmentDetails();
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Add onchange event listener to file input field
-    document.getElementById('fileInput').addEventListener('change', displayFileName);
+        const fileInput = document.getElementById('fileInput');
+        if (fileInput) {
+            fileInput.addEventListener('change', displayFileName);
+        }
 
-    // Click event listener for custom file upload button
-    document.querySelector('.custom-file-upload').addEventListener('click', function() {
-        document.getElementById('fileInput').click();
+        const customFileUpload = document.querySelector('.custom-file-upload');
+        if (customFileUpload) {
+            customFileUpload.addEventListener('click', () => {
+                document.getElementById('fileInput').click();
+            });
+        }
+
+        const submitAssignmentBtn = document.getElementById('submitAssignmentBtn');
+        if (submitAssignmentBtn) {
+            submitAssignmentBtn.addEventListener('click', submitAssignment);
+        }
     });
 
-    // Submit assignment button click event listener
-    document.getElementById('submitAssignmentBtn').addEventListener('click', async function(event) {
-        event.preventDefault(); // Prevent default form submission
+    function populateAssignmentDetails() {
+        const assignmentDetailsDiv = document.getElementById('assignmentDetails');
+        const urlParams = new URLSearchParams(window.location.search);
+        console.log("URL Parameters:", urlParams); // Log URL parameters
 
-        // Get the file input element
-        const fileInput = document.getElementById('fileInput');
+        const assignmentTitle = urlParams.get('title');
+        console.log("Assignment Title:", assignmentTitle); // Log assignment title
 
-        // Check if a file is selected
-        if (!fileInput.files || fileInput.files.length === 0) {
-            alert('Please select a file to upload.');
+        const assignmentDetail = urlParams.get('detail');
+        console.log("Assignment Detail:", assignmentDetail); // Log assignment detail
+
+        const assignmentLink = urlParams.get('link');
+        console.log("Assignment Link:", assignmentLink); // Log assignment link
+
+        const assignmentDueDate = urlParams.get('dueDate');
+        console.log("Assignment Due Date:", assignmentDueDate); // Log assignment due date
+
+        const assignmentDueTime = urlParams.get('dueTime');
+        console.log("Assignment Due Time:", assignmentDueTime); // Log assignment due time
+
+        const assignmentSubject = urlParams.get('subject');
+        console.log("Assignment Subject:", assignmentSubject); // Log assignment subject
+
+        if (!assignmentTitle || !assignmentDetail || !assignmentSubject || !assignmentDueDate || !assignmentDueTime) {
+            console.error('Incomplete assignment data found in URL parameters');
             return;
         }
 
-        // Get assignment data from the URL parameters
-        const urlParams = new URLSearchParams(window.location.search);
-        const assignmentTitle = urlParams.get('title');
-        const assignmentDetail = urlParams.get('detail');
-        const assignmentSubject = urlParams.get('subject');
-        const assignmentDueDate = urlParams.get('dueDate');
-        const assignmentDueTime = urlParams.get('dueTime');
+        const formattedDueDate = assignmentDueDate.split('/').reverse().join('-');
+        const formattedDueTime = assignmentDueTime.includes('AM') ? assignmentDueTime.replace(' AM', '') : (parseInt(assignmentDueTime.split(':')[0]) + 12) + ':' + assignmentDueTime.split(':')[1].replace(' PM', '');
+        const deadline = new Date(`${formattedDueDate}T${formattedDueTime}`);
 
-        // Combine date and time into a single deadline string
-        const deadline = new Date(`${assignmentDueDate}T${assignmentDueTime}`);
+        let assignmentDetailsHTML = `
+            <div class="assignment">
+                <p><strong>Subject:</strong> ${assignmentSubject}</p>
+                <p><strong>Title:</strong> ${assignmentTitle}</p>
+                <p><strong>Details:</strong> ${assignmentDetail}</p>
+                <p><strong>Due Date:</strong> ${assignmentDueDate}</p>
+                <p><strong>Due Time:</strong> ${assignmentDueTime}</p>
+        `;
 
-        // Prepare assignment data to send in the request body
-        const formData = new FormData();
-        formData.append('file', fileInput.files[0]);
-        formData.append('title', assignmentTitle);
-        formData.append('detail', assignmentDetail);
-        formData.append('subject', assignmentSubject);
-        formData.append('deadline', deadline);
-
-        // Send POST request to submit assignment
-        try {
-            const response = await fetch('/submit_assignment', {
-                method: 'POST',
-                body: formData
-            });
-
-            // Check if request was successful
-            if (response.ok) {
-                console.log('Assignment submitted successfully');
-                alert('Assignment Submitted Successfully');
-            } else {
-                console.error('Failed to submit assignment');
-                alert('Failed to submit assignment');
-            }
-        } catch (error) {
-            console.error('Error submitting assignment:', error);
-            alert('Error submitting assignment');
+        if (assignmentLink) {
+            assignmentDetailsHTML += `
+                <p><strong>Link:</strong> <a href="${assignmentLink}" target="_blank">${assignmentLink}</a></p>
+            `;
+        } else {
+            assignmentDetailsHTML += `
+                <p><strong>Files:</strong> No files attached</p>
+            `;
         }
-    });
-});
 
-  </script>
-  
+        assignmentDetailsHTML += `</div>`;
+
+        assignmentDetailsDiv.innerHTML = assignmentDetailsHTML;
+    }
+
+    async function submitAssignment(event) {
+            event.preventDefault();
+
+        const urlParams = new URLSearchParams(window.location.search);
+
+        
+        const assignmentTitle = urlParams.get('title');
+        // console.log("Assignment Title:", assignmentTitle); // Log assignment title
+
+        const assignmentDetail = urlParams.get('detail');
+        // console.log("Assignment Detail:", assignmentDetail); // Log assignment detail
+
+        const assignmentLink = urlParams.get('link');
+        // console.log("Assignment Link:", assignmentLink); // Log assignment link
+
+        const assignmentDueDate = urlParams.get('dueDate');
+        // console.log("Assignment Due Date:", assignmentDueDate); // Log assignment due date
+
+        const assignmentDueTime = urlParams.get('dueTime');
+        // console.log("Assignment Due Time:", assignmentDueTime); // Log assignment due time
+
+        const assignmentSubject = urlParams.get('subject');
+        // console.log("Assignment Subject:", assignmentSubject); // Log assignment subject
+
+        const fileInput = document.getElementById('fileInput');
+        const formData = new FormData();
+        // formData.append('file', fileInput.files[0]);
+        // console.log("FILE NAME",fileInput.files[0]?.name);
+
+      const payload = {
+        title: assignmentTitle, 
+        detail: assignmentDetail, 
+        link: assignmentLink, 
+        dueDate: assignmentDueDate, 
+        dueTime: assignmentDueTime, 
+        subject: assignmentSubject,
+        file: fileInput.files[0]?.name,
+      }
+
+            try {
+              console.log("payload", payload)
+                const response = await fetch('http://localhost:3000/submit_assignment', {
+                    method: 'POST',
+                    body: JSON.stringify(payload),
+                    headers: {"Content-Type":"application/json"}
+                });
+
+                if (response.ok) {
+                    console.log('Assignment submitted successfully');
+                    alert('Assignment Submitted Successfully');
+                } else {
+                    console.error('Failed to submit assignment');
+                    alert('Failed to submit assignment');
+                }
+            } catch (error) {
+                console.error('Error submitting assignment:', error);
+                alert('Error submitting assignment');
+            }
+        }
+
+        const assignmentForm = document.getElementById('assignmentForm');
+        assignmentForm.addEventListener('submit', submitAssignment);
+</script>
+
+
+    
+
 
 
 

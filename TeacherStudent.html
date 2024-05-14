@@ -22,7 +22,26 @@
         <img src="image/user.jpg" alt="User Picture" class="user-picture">
 
         
-        <h1>Student</h1>
+        <h1>Student Report</h1>
+         <!-- Assignments Table -->
+    <table id="assignmentsTable">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Subject</th>
+                <th>Detail</th>
+                <th>File</th>
+                <th>Due Date</th>
+                <th>Due Time</th>
+                <th>Submitted Date</th>
+                <th>Submitted Time</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Assignment rows will be appended here -->
+        </tbody>
+    </table>
         
     </div>
     <div class="title">
@@ -32,5 +51,64 @@
         <a href="Teachergrade.html" class="button">Grade</a>
         <a href="loginpage.html" class="button" style="margin-top: 200px;">Logout</a>
     </div>
+   
+</div>
+
+    <script>
+        async function fetchAssignments() {
+            try {
+                const response = await fetch('http://localhost:3000/fetch_assignments');
+                if (response.ok) {
+                    const assignments = await response.json();
+                    displayAssignments(assignments); // Call function to display assignments
+                } else {
+                    console.error('Failed to fetch assignments');
+                }
+            } catch (error) {
+                console.error('Error fetching assignments:', error);
+            }
+        }
+
+        function displayAssignments(assignments) {
+    // Sort assignments array by due date in descending order
+    assignments.sort((a, b) => {
+        const dueDateA = new Date(`${a.dueDate} ${a.dueTime}`);
+        const dueDateB = new Date(`${b.dueDate} ${b.dueTime}`);
+        return dueDateB - dueDateA; // Sort in descending order
+    });
+
+    const tableBody = document.querySelector('#assignmentsTable tbody');
+    assignments.forEach(assignment => {
+        // Split submittedAt into date and time parts
+        const submittedDate = new Date(assignment.submittedAt);
+        const submittedDateStr = submittedDate.toLocaleDateString();
+        const submittedTimeStr = submittedDate.toLocaleTimeString();
+
+        // Convert dueDate and dueTime to a single date object
+        const dueDateTime = new Date(`${assignment.dueDate} ${assignment.dueTime}`);
+
+        // Check if assignment is submitted before the due date and time
+        const status = submittedDate <= dueDateTime ? 'On time' : 'Late';
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${assignment.title}</td>
+            <td>${assignment.subject}</td>
+            <td>${assignment.detail}</td>
+            <td>${assignment.file}</td>
+            <td>${assignment.dueDate}</td>
+            <td>${assignment.dueTime}</td>
+            <td>${submittedDateStr}</td>
+            <td>${submittedTimeStr}</td>
+            <td>${status}</td> <!-- Display status -->
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
+
+        // Call fetchAssignments when the page loads
+        window.addEventListener('load', fetchAssignments);
+    </script>
 </body>
 </html>

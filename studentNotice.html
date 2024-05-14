@@ -1,131 +1,163 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>To-Do</title>
-    <style>
-      /* Top right icons */
-      .top-right {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-      }
+<style>
+  /* Top right icons */
+  .top-right {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
 
-      .top-right img {
-        margin-left: 10px;
-        border-radius: 50%;
-        transition: transform 0.3s ease-in-out;
-      }
+  .top-right img {
+    margin-left: 10px;
+    border-radius: 50%;
+    transition: transform 0.3s ease-in-out;
+  }
 
-      .top-right img:hover {
-        transform: scale(1.1);
-      }
+  .top-right img:hover {
+    transform: scale(1.1);
+  }
 
-      /* sidebar */
-      .sidebar {
-        height: 100%;
-        width: 250px;
-        position: fixed;
-        top: 0;
-        left: 0;
-        padding-top: 20px;
-        background-color: #aaa7e3;
-        align-items: center;
-      }
+  /* sidebar */
+  .sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+    background-color: #aaa7e3;
+    align-items: center;
+  }
 
-      .Dashboard {
-        border-radius: 50%;
-        height: 100px;
-        width: 100px;
-        margin-left: 75px;
-        margin-bottom: 20px;
-      }
+  .Dashboard {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    margin-left: 75px;
+    margin-bottom: 20px;
+  }
 
-      .sidebar ul {
-        list-style-type: none;
-        padding: 0;
-        margin: 15px;
-      }
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 15px;
+  }
 
-      .sidebar ul li {
-        display: flex;
-        align-items: center;
-        padding: 20px 20px;
-      }
+  .sidebar ul li {
+    display: flex;
+    align-items: center;
+    padding: 20px 20px;
+  }
 
-      .sidebar ul li button {
-        border-radius: 100px;
-        height: 35px;
-        width: 120px;
-        font-size: 1.1rem;
-        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-        background-color: #f7f7f7;
-      }
+  .sidebar ul li button {
+    border-radius: 100px;
+    height: 35px;
+    width: 120px;
+    font-size: 1.1rem;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    background-color: #f7f7f7;
+  }
 
-      .sidebar ul li button:hover {
-        background-color: #e9c3dc;
-        transform: scale(1.05);
-      }
+  .sidebar ul li button:hover {
+    background-color: #e9c3dc;
+    transform: scale(1.05);
+  }
 
-      .Logout {
-        margin-top: 70px;
-      }
+  .Logout {
+    margin-top: 70px;
+  }
 
-      /* Adjustments */
-      .notice {
-        display: flex;
-        justify-content: center; /* Center horizontally */
-        margin-top: 50px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="notice">
-      <div class="top-right">
-        <a href="#" target="_blank">
-          <img
-            src="image/notif.png"
-            alt="Notification"
-            width="30"
-            height="30"
-          />
+  /* Adjustments */
+  .notice {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    margin-top: 50px;
+  }
+
+  .inform {
+    margin-top: 20px;
+    text-align: center;
+    background-color: #aaa7e3;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: 18rem;
+    border-radius: 10px;
+    margin-right: 10rem;
+  }
+
+  .inform1 {
+    margin-top: 20px;
+    text-align: center;
+    background-color: #aaa7e3;
+    padding: 10px;
+    margin-left: 18rem;
+    border-radius: 10px;
+    margin-right: 10rem;
+  }
+
+  .inform p1,
+  .inform1 p1 {
+    font-size: 1.2rem;
+    line-height: 1.5;
+  }
+</style>
+</head>
+<body>
+<div class="notice">
+  <div class="top-right">
+    <a href="#" target="_blank">
+      <img
+        src="image/notif.png"
+        alt="Notification"
+        width="30"
+        height="30"
+      />
+    </a>
+    <a href="https://mail.google.com/mail/u/1/#inbox" target="_blank">
+      <img src="image/profile.png" alt="Profile" width="40" height="40" />
+    </a>
+  </div>
+  <div class="sidebar">
+    <img src="image/Herald.png" alt="pic" class="Dashboard" />
+    <ul>
+      <li>
+        <a href="StudentDashboard.html">
+          <button type="Home">Home</button>
         </a>
-        <a href="https://mail.google.com/mail/u/1/#inbox" target="_blank">
-          <img src="image/profile.png" alt="Profile" width="40" height="40" />
+      </li>
+      <li>
+        <a href="studentNotice.html">
+          <button>Noticeboard</button>
         </a>
-      </div>
-      <div class="sidebar">
-        <img src="image/Herald.png" alt="pic" class="Dashboard" />
-        <ul>
-          <li>
-            <a href="StudentDashboard.html">
-              <button type="Home">Home</button>
-            </a>
-          </li>
-          <li>
-            <a href="studentNotice.html">
-              <button>Noticeboard</button>
-            </a>
-          </li>
-          <li>
-            <a href="to-do.html">
-              <button>To-Do</button>
-            </a>
-          </li>
-          <li>
-            <a href="StudentSetting.html">
-              <button>Settings</button>
-            </a>
-          </li>
-          <li>
-            <button class="Logout" onclick="window.location.href='loginpage.html'">
-              Logout
-            </button>
-          </li>
-        </ul>
-      </div>
-      <h1>Noticeboard</h1>
-    </div>
-  </body>
+      </li>
+      <li>
+        <a href="to-do.html">
+          <button>To-Do</button>
+        </a>
+      </li>
+      <li>
+        <a href="StudentSetting.html">
+          <button>Settings</button>
+        </a>
+      </li>
+      <li>
+        <button class="Logout">Logout</button>
+      </li>
+    </ul>
+  </div>
+  <h1>Noticeboard</h1>
+</div>
+<div class="inform">
+  <p1>
+    Please be informed that a new homework assignment has been added for the
+    science subject. Kindly check your to-do list.<br />
+    -Jenny Shrestha
+  </p1>
+</div>
+<div class="inform1">
+  <p1>
+    Today's English class has been canceled. Utilize this time to catch up
+    on any readings, or to review previous lessons. <br />- Dipesh Shrestha
+  </p1>
+</div>
+</body>
 </html>

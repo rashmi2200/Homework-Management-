@@ -10,6 +10,10 @@ const Submission = require('./models/submissionModel');
 const Student = require('./models/studentModel');
 const Teacher = require('./models/teacherModel');
 const Subject = require('./models/subjectModel');
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' }); 
+const fs = require('fs');
+const path = require('path');
 
 // MongoDB connection string
 app.use(cors({
@@ -293,29 +297,48 @@ app.get('/student/assignments', async (req, res) => {
 });
 
 
+// app.post('/submit_assignment', (req, res) => {
+//     try {
+//         // Handle assignment submission here
+//         const uploadedFile = req.body.file; // Uploaded file (base64 encoded)
+//         console.log('Uploaded File:', uploadedFile);
 
-// Handle assignment submission
+//         // You can access other assignment details from req.body if needed
+//         // const { title, detail, subject, dueDate, dueTime, link } = req.body;
+
+//         // Process and store the assignment data in the database
+
+//         res.status(200).send('Assignment submitted successfully');
+//     } catch (error) {
+//         console.error('Error submitting assignment:', error);
+//         res.status(500).send('Internal server error');
+//     }
+// });
+// Endpoint for submitting assignments
 app.post('/submit_assignment', async (req, res) => {
     try {
-        console.log('Request Body:', req.body); // Log the request body
-        
-        // Retrieve assignment data from request body
-        const { subject, title, detail, file, deadline } = req.body;
+        // Extract assignment details from request body
+        const { title, detail, subject, dueDate, dueTime, link, file } = req.body;
 
-        console.log('Assignment Data:', { subject, title, detail, file, deadline }); // Log the assignment data
-        
-        // Create new submission document
-        const result = await Submission.create({
-            subject,
+        console.log("payload boody",{ title, detail, subject, dueDate, dueTime, link, file })
+        // const uploadedFile = req.body.file; // Uploaded file (base64 encoded)
+
+        // Process and store the assignment data in the database
+        const submission =  Submission.create({
             title,
             detail,
-            file,
-            deadline,
-            submittedAt: new Date() // Record current date and time
+            subject,
+            dueDate,
+            dueTime,
+            link,
+            file // Store the file in the database
         });
 
-        console.log('Submission Result:', result); // Log the result of the submission
-        
+        // Save the submission to the database
+        // await submission.save();
+
+        console.log('Submission saved to database:', submission);
+
         // Send success response
         res.status(200).json({ message: 'Assignment submitted successfully' });
     } catch (error) {
@@ -323,6 +346,8 @@ app.post('/submit_assignment', async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
+
+
 
 // //SUBMITTING FOR STUDENT
 
@@ -378,6 +403,29 @@ app.post('/submit_assignment', async (req, res) => {
 //   });
   
  
+
+//FETCHING STUDENTS FILE FROM STUDENT SUBMISSION
+
+// Endpoint for fetching assignments
+app.get('/fetch_assignments', async (req, res) => {
+    try {
+        // Fetch assignments from the database
+        const assignments = await Submission.find();
+
+        // Send the fetched assignments as a JSON response
+        res.status(200).json(assignments);
+    } catch (error) {
+        console.error('Error fetching assignments:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+
+
+
+
+
+
 
 
 

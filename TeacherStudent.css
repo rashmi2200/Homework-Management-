@@ -24,6 +24,7 @@ h1 {
     left: 34%; /* Center the heading horizontally */
     transform: translateX(-50%); /* Center the heading horizontally */
     z-index: 999; /* Ensure the heading is on top */
+    margin-left: 60px;
 }
 
 .background-layer {
@@ -108,4 +109,21 @@ h1 {
     height: auto; /* Maintain aspect ratio */
     border-radius: 50%; /* Make it circular if needed */
     z-index: 999; /* Ensure it's below notification icon */
+}
+#assignmentsTable {
+    width: 90%;
+    border-collapse: collapse;
+    margin-top: 140px; /* Adjust margin as needed */
+    margin-left: 45px;
+}
+
+#assignmentsTable th,
+#assignmentsTable td {
+    border: 1px solid #dddddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#assignmentsTable th {
+    background-color: #f2f2f2;
 }
