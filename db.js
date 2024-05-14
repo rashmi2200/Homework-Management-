@@ -421,7 +421,19 @@ app.get('/fetch_assignments', async (req, res) => {
 });
 
 
+// Endpoint to fetch graded assignments
+app.get('/graded_assignments', async (req, res) => {
+    try {
+        // Query the database to retrieve subject, assignment title, and submitted date
+        const gradedAssignments = await Submission.find();
 
+        // Send the fetched assignments as a JSON response
+        res.status(200).json(gradedAssignments);
+    } catch (error) {
+        console.error('Error fetching graded assignments:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
 
 
 

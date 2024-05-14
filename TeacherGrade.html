@@ -3,61 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Marks</title>
+    <title>Marking Panel</title>
     <link rel="stylesheet" href="TeacherGrade.css">
 </head>
 <body>
     <div class="background-layer"></div>
 
     <div class="content-layer">
-
-        
         <!-- Notification icon -->
         <img src="image/notif.png" alt="Notification Icon" class="notification-icon">
         
         <!-- User picture -->
         <img src="image/user.jpg" alt="User Picture" class="user-picture">
 
+        <h1>Marking Panel</h1>
         
+        <!-- Table for displaying graded assignments -->
         <table class="student-table">
             <thead>
                 <tr>
-                    <th>Student Name</th>
+                    <th>Title</th>
+                    <th>Subject</th>
                     <th>Submitted Date</th>
-                    <th>Submitted File</th>
                     <th>Grade</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>John Doe</td>
-                    <td>2024-04-03</td>
-                    <td><a href="submitted_file.docx">submitted_file.docx</a></td>
-                    <td>
-                        <div class="grade-dropdown">
-                            <img src="image/grade.png" alt="Grade Icon" class="grade-icon">
-                            <span class="selected-grade"></span> <!-- Placeholder for selected grade -->
-                            <div class="dropdown-content">
-                                <a href="#" data-grade="A+">A+</a>
-                                <a href="#" data-grade="A">A</a>
-                                <a href="#" data-grade="B+">B+</a>
-                                <a href="#" data-grade="B">B</a>
-                                <a href="#" data-grade="C+">C+</a>
-                                <a href="#" data-grade="C">C</a>
-                                <a href="#" data-grade="D+">D+</a>
-                                <a href="#" data-grade="D">D</a>
-                            </div>
-                        </div>
-                        </div>
-                    </td>
-                </tr>
-                <!-- More rows here -->
+                <!-- Assignment rows will be dynamically added here -->
             </tbody>
         </table>
-
     </div>
-    
-    <h1>Marking Panel</h1>
+
+    <!-- Navigation buttons -->
     <div class="title">
         <a href="teacherDashboard.html" class="button">Dashboard</a> 
         <a href="TeacherStudent.html" class="button">Students</a> 
@@ -66,6 +43,7 @@
         <a href="loginpage.html" class="button" style="margin-top: 200px;">Logout</a>
     </div>
 
+    <!-- Dropdown for selecting subject -->
     <div class="dropdown">
         <select id="subjectDropdown" class="button">
             <option value="" disabled selected>Select Subject</option>
@@ -75,9 +53,7 @@
         </select>
     </div>
     
-    
-    
-
+    <!-- JavaScript file -->
     <script src="TeacherGrade.js"></script> 
 </body>
 </html>
