@@ -10,6 +10,7 @@ const Submission = require('./models/submissionModel');
 const Student = require('./models/studentModel');
 const Teacher = require('./models/teacherModel');
 const Subject = require('./models/subjectModel');
+const Grade = require('./models/gradeModel');
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' }); 
 const fs = require('fs');
@@ -435,6 +436,27 @@ app.get('/graded_assignments', async (req, res) => {
     }
 });
 
+
+app.post('/save_grade', async (req, res) => {
+    try {
+        const { title, subject, submittedDate, grade: studentGrade } = req.body;
+
+
+        const newGrade = await Grade.create({
+            title: title,
+            subject: subject,
+            submittedDate: submittedDate,
+            grade: studentGrade
+        });
+
+        console.log('Grade saved to database:', newGrade);
+
+        res.status(200).json({ message: 'Grade saved successfully' });
+    } catch (error) {
+        console.error('Error saving grade:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
 
 
 
