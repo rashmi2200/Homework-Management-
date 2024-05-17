@@ -16,6 +16,10 @@ const gradeSchema = new mongoose.Schema({
     grade: {
         type: String,
         required: true
+    },
+    fileLink: { // Add the fileLink field
+        type: String,
+        required: false // Optional if not all grades have a file link
     }
 });
 

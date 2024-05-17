@@ -439,14 +439,16 @@ app.get('/graded_assignments', async (req, res) => {
 
 app.post('/save_grade', async (req, res) => {
     try {
-        const { title, subject, submittedDate, grade: studentGrade } = req.body;
+        const { title, subject, submittedDate, file ,grade: studentGrade } = req.body;
 
 
         const newGrade = await Grade.create({
             title: title,
             subject: subject,
             submittedDate: submittedDate,
+            file: file,
             grade: studentGrade
+            
         });
 
         console.log('Grade saved to database:', newGrade);

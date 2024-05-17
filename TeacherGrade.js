@@ -98,6 +98,7 @@ function displayGradedAssignments(gradedAssignments) {
             <td>${assignment.title}</td>
             <td>${assignment.subject}</td>
             <td>${formatDate(assignment.submittedAt)}</td>
+            <td>${assignment.file}</td>
             <td>
                 <button class="grade-button">Grade</button>
                 <div class="grade-dropdown">
@@ -156,10 +157,11 @@ document.addEventListener('click', async function(event) {
         if (row) {
             // Access the cells directly from the row
             const cells = row.querySelectorAll('td');
-            if (cells.length >= 3) { // Ensure at least 3 cells are present
+            if (cells.length >= 4) { // Ensure at least 4 cells are present
                 const assignmentTitle = cells[0].textContent.trim();
                 const subject = cells[1].textContent.trim();
                 const submittedDate = cells[2].textContent.trim();
+                const fileLink = cells[3].querySelector('a').href; // Assuming a link element for the file
 
                 // Prompt confirmation only if the selected grade is not already the final grade
                 if (!row.classList.contains('selected')) {
@@ -176,7 +178,9 @@ document.addEventListener('click', async function(event) {
                                     title: assignmentTitle,
                                     subject: subject,
                                     submittedDate: submittedDate,
+                                    fileLink: fileLink, // Include the file link in the request
                                     grade: grade
+                                    
                                 })
                             });
                             if (response.ok) {
@@ -208,3 +212,4 @@ document.addEventListener('click', async function(event) {
 
 // Call fetchGradedAssignments when the page loads
 window.addEventListener('load', fetchGradedAssignments);
+
