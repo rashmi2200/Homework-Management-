@@ -335,60 +335,73 @@
   <body>
     <div class="top-right">
       <a href="#" target="_blank">
-        <img src="notification.png" alt="Notification" width="30" height="30" />
+        <img src="image/notif.png" alt="Notification" width="30" height="30" />
       </a>
       <a href="https://mail.google.com/mail/u/1/#inbox" target="_blank">
-        <img src="profile.png" alt="Profile" width="40" height="40" />
+        <img src="image/profile.png" alt="Profile" width="40" height="40" />
       </a>
     </div>
 
     <div class="Sidebar">
-      <img src="Herald.png" alt="pic" class="Dashboard" />
+      <img src="image/herald.png" alt="pic" class="Dashboard" />
       <ul>
         <li>
-          <a href="StudentDashboard.html">
-            <button type="Home">Home</button>
-          </a>
+          <button
+            class="Home"
+            onclick="window.location.href='StudentDashboard.html'">
+            Home
+          </button>
         </li>
         <li>
-          <a href="notice.html">
-            <button>Noticeboard</button>
-          </a>
+          <a href="studentNotice.html">
+          <button>Noticeboard</button>
         </li>
+      </a>
         <li>
           <a href="to-do.html">
-            <button>To-Do</button>
-          </a>
+          <button type="todo">To-Do</button>
         </li>
+      </a>
         <li>
-          <a href="setting.html">
-            <button>Settings</button>
-          </a>
+          <a href="StudentSetting.html">
+          <button>Settings</button>
         </li>
+      </a>
+      <li>
+        <a href="StudentGrade.html">
+        <button>Grade</button>
+      </li>
+    </a>
         <li>
-          <button class="Logout" onclick="window.location.href='loginpage.html'">
+          <button
+            class="Logout"
+            onclick="window.location.href='loginpage.html'">
             Logout
           </button>
         </li>
       </ul>
+    </div>
     </div>
 
     <div class="settings-container">
       <h2 class="settings-header">Settings</h2>
       <div class="setting-card">
         <label for="full-name">Full Name:</label>
-        <input type="text" id="full-name" name="full-name" />
+        <input type="text" id="full-name" name="full-name" required placeholder="Jenny Kim" />
       </div>
       <div class="setting-card">
         <label for="phone-number">Phone Number:</label>
-        <input type="text" id="phone-number" name="phone-number" />
+        <input type="text" id="phone-number" name="phone-number" required placeholder="9845214587" />
       </div>
       <div class="setting-card">
         <label for="location">Location:</label>
-        <input type="text" id="location" name="location" />
+        <input type="text" id="location" name="location" required placeholder="Ason , Kathmandu" />
       </div>
       <button class="save-button" onclick="saveChanges()">Save Changes</button>
     </div>
+
+
+
     <script src="setting.js"></script>
   </body>
 </html>

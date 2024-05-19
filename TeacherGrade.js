@@ -161,7 +161,14 @@ document.addEventListener('click', async function(event) {
                 const assignmentTitle = cells[0].textContent.trim();
                 const subject = cells[1].textContent.trim();
                 const submittedDate = cells[2].textContent.trim();
-                const fileLink = cells[3].querySelector('a').href; // Assuming a link element for the file
+                let fileLink = ''; // Default to empty string
+
+                const anchor = cells[3].querySelector('a');
+                if (anchor) {
+                    fileLink = anchor.href;
+                } else {
+                    console.warn('No anchor tag found in the file cell.');
+                }
 
                 // Prompt confirmation only if the selected grade is not already the final grade
                 if (!row.classList.contains('selected')) {
@@ -180,7 +187,6 @@ document.addEventListener('click', async function(event) {
                                     submittedDate: submittedDate,
                                     fileLink: fileLink, // Include the file link in the request
                                     grade: grade
-                                    
                                 })
                             });
                             if (response.ok) {
@@ -210,6 +216,6 @@ document.addEventListener('click', async function(event) {
     }
 });
 
+
 // Call fetchGradedAssignments when the page loads
 window.addEventListener('load', fetchGradedAssignments);
-

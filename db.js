@@ -461,8 +461,19 @@ app.post('/save_grade', async (req, res) => {
 });
 
 
+// Endpoint to fetch graded assignments from the Grade model
+app.get('/grades_assignments', async (req, res) => {
+    try {
+        // Query the database to retrieve graded assignments
+        const gradesAssignments = await Grade.find();
 
-
+        // Send the fetched assignments as a JSON response
+        res.status(200).json(gradesAssignments);
+    } catch (error) {
+        console.error('Error fetching graded assignments:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
 
 
 // Route for handling student creation
